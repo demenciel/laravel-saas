@@ -29,15 +29,17 @@ export default function Login({ status, canResetPassword }: { status?: string, c
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                <div className='dark:text-white/50'>
+                    <InputLabel className='dark:text-white/50' htmlFor="email" value="Email" />
 
                     <TextInput
                         id="email"
                         type="email"
+
                         name="email"
+                        style={{ background: 'rgba(0,0,0,0.5' }}
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full dark:text-white/50"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
@@ -53,6 +55,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         id="password"
                         type="password"
                         name="password"
+                        style={{ background: 'rgba(0,0,0,0.5' }}
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
@@ -89,17 +92,18 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                 </div>
             </form>
             <div className='w-full border-t border-primary my-4'></div>
-            <a href={route('facebook.login')} className="flex items-center justify-center mt-4">
-                <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <span className="ms-2 text-white">Log in with Facebook</span>
-                </PrimaryButton>
-            </a>
-            <a href={route('google.login')} className="flex items-center justify-center mt-4">
-                <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                    <span className="ms-2 text-white">Log in with Google</span>
-                </PrimaryButton>
-            </a>
-
+            <div className='flex flex-col md:flex-row items-center justify-between'>
+                <a href={route('facebook.login')} className="w-full flex items-center justify-center mt-4">
+                    <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <span className="text-white">Log in with Facebook</span>
+                    </PrimaryButton>
+                </a>
+                <a href={route('google.login')} className="w-full flex items-center justify-center mt-4">
+                    <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        <span className="ms-2 text-white">Log in with Google</span>
+                    </PrimaryButton>
+                </a>
+            </div>
         </GuestLayout>
     );
 }
