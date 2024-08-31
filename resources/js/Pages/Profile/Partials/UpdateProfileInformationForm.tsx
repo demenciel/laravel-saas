@@ -24,7 +24,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
                     Update your account's profile information and email address.
@@ -37,6 +37,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="name"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
@@ -53,6 +54,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="email"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}
@@ -96,7 +98,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
+                        <p className="text-sm text-green-600">Saved.</p>
                     </Transition>
                 </div>
             </form>

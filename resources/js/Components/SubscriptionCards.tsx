@@ -1,5 +1,5 @@
-import React from "react";
-import { CheckIcon } from "lucide-react";
+import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 interface Product {
     id: string;
@@ -29,7 +29,20 @@ export default function SubscriptionCards({ products = [] }: SubscriptionCardPro
                 <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Choose Your Plan</h2>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {products.map((product, index) => (
-                        <div key={product.id} className={index === 1 ? "scale-110" : ""}>
+                        <motion.div
+                            key={product.id}
+                            viewport={{ once: true }}
+                            whileInView="visible"
+                            variants={{
+                                visible: { opacity: 1, scale: 1 },
+                                hidden: { opacity: 0, scale: 0 }
+                            }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.2 }}
+                            whileHover={{ scale: 1.05 }}
+                            className={index === 1 ? "scale-110" : ""}
+                        >
                             <div className="
                                 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                                 <div className="p-6">
@@ -57,7 +70,7 @@ export default function SubscriptionCards({ products = [] }: SubscriptionCardPro
                                     Get Started
                                 </button>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

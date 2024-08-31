@@ -33,6 +33,7 @@ export default function Register() {
                     <TextInput
                         id="name"
                         name="name"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                         value={data.name}
                         className="mt-1 block w-full"
                         autoComplete="name"
@@ -50,6 +51,7 @@ export default function Register() {
                     <TextInput
                         id="email"
                         type="email"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -66,6 +68,7 @@ export default function Register() {
 
                     <TextInput
                         id="password"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                         type="password"
                         name="password"
                         value={data.password}
@@ -83,6 +86,7 @@ export default function Register() {
 
                     <TextInput
                         id="password_confirmation"
+                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
@@ -98,7 +102,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="underline text-sm text-gray-600 hover:text-gray-900 dark:hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?
                     </Link>

@@ -32,7 +32,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                             <div className="ms-3 relative ">
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md  overflow-hidden rounded-lg bg-whiteshadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                                        <span className="inline-flex overflow-hidden rounded-lg bg-whiteshadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                                             <button
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md focus:outline-none transition ease-in-out duration-150"
@@ -56,9 +56,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')} className='ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]'>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('subscribe.index')} className='ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]'>Subscribe</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button" className='ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]'>
+                                        <Dropdown.Link href={route('profile.edit')} >Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('subscribe.index')} >Subscribe</Dropdown.Link>
+                                        <Dropdown.Link href={route('logout')} method="post" as="button" >
                                             Log Out
                                         </Dropdown.Link>
                                     </Dropdown.Content>
@@ -117,11 +117,11 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                 </div>
             </nav>
 
-            {header && (
-                <header className="bg-whiteshadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-black/50 dark:text-white/50">{header}</div>
+            {/* {header && (
+                <header className="bg-whiteshadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-gray/50 dark:text-white/50">{header}</div>
                 </header>
-            )}
+            )} */}
 
             <main>{children}</main>
         </div>
