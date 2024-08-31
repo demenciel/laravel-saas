@@ -3,6 +3,7 @@ import { PageProps } from '@/types';
 import SubscriptionCards from '@/Components/SubscriptionCards';
 import Header from '@/Components/Header';
 import TechnologiesBanner from '@/Components/TechnoBanner';
+import FeatureCarousel from '@/Components/FeaturesCarousel';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
     const products = usePage().props.products;
@@ -50,10 +51,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                                 products={products?.data}
                             />
                             <TechnologiesBanner />
+                            <FeatureCarousel />
                         </main>
 
                         <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
+                            TechnoSaas © {new Date().getFullYear()}
                         </footer>
                     </div>
                 </div>
