@@ -4,7 +4,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 
 export default function ResetPassword({ token, email }: { token: string, email: string }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,6 +13,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
         password: '',
         password_confirmation: '',
     });
+    const appUrl = usePage().props.url;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -24,7 +25,19 @@ export default function ResetPassword({ token, email }: { token: string, email: 
 
     return (
         <GuestLayout>
-            <Head title="Reset Password" />
+            <Head>
+                <title>Reset Password</title>
+                <meta name="description" content="The Reset Password page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
+                <meta property="og:title" content="Dashboard" />
+                <meta property="og:description" content="The Reset Password page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta property="og:url" content={`${appUrl}/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Reset Password" />
+                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+            </Head>
+
 
             <form onSubmit={submit}>
                 <div>

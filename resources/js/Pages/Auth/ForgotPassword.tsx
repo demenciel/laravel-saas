@@ -2,13 +2,14 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
+    const appUrl = usePage().props.appUrl;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -18,7 +19,18 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head>
+                <title>Forgot Password</title>
+                <meta name="description" content="The forgot your password page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
+                <meta property="og:title" content="Dashboard" />
+                <meta property="og:description" content="The forgot your password page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta property="og:url" content={`${appUrl}/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Forgot Password" />
+                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+            </Head>
 
             <div className="mb-4 text-sm text-gray-600">
                 Forgot your password? No problem. Just let us know your email address and we will email you a password
@@ -31,6 +43,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 <TextInput
                     id="email"
                     type="email"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
                     name="email"
                     value={data.email}
                     className="mt-1 block w-full"

@@ -25,7 +25,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                     </div>
                     <div className="hidden sm:flex sm:items-center">
                         <Link
-                            href="#"
+                            href="#products"
                             className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Products
@@ -90,7 +90,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                         transition={{ duration: 0.6 }}
                     >
                         <Link
-                            href="#"
+                            href="#products"
                             className="block rounded-md px-3 py-2 text-base font-medium text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Products

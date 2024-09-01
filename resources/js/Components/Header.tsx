@@ -39,7 +39,7 @@ const Header = () => {
                             className="flex flex-col gap-2 min-[400px]:flex-row justify-center"
                         >
                             <Link
-                                href='#'
+                                href='#products'
                                 className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-transform duration-300 hover:bg-primary/90 hover:scale-105 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group"
                             >
                                 <span className="relative z-10 text-gray-800 dark:text-white font-bold">Get Started</span>

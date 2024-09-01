@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubscribeController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Stripe\Product;
@@ -27,28 +26,34 @@ Route::get('/', function () {
         'active' => true,
     ]);
 
-    // Loop through products to fetch prices
     foreach ($products->data as $product) {
         $prices = \Stripe\Price::all([
             'product' => $product->id,
         ]);
-
-        // Attach prices to the product object
         $product->prices = $prices->data;
     }
     return Inertia::render('Welcome', [
+        'appUrl' =>  env('APP_URL'),
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
         'products' => $products,
+        'csrf'  => csrf_token(),
         'stripeKey' => config('cashier.key'),
     ]);
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'appUrl' =>  env('APP_URL'),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('payments')->name('payments.')->group(function () {
+    Route::post('/redirect-to-one-time-checkout', [PaymentsController::class, 'redirectToOneTimeCheckout'])->name('one-time-checkout');
+    Route::get('/download', [PaymentsController::class, 'downloadBoilerplate'])->name('download');
+    Route::get('/success', [PaymentsController::class, 'paymentSuccess'])->name('success');
+    Route::get('/cancel', [PaymentsController::class, 'paymentCancel'])->name('cancel');
+});
 
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
@@ -56,26 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
     });
-
-    Route::prefix('subscribe')->name('subscribe.')->group(function () {
-        Route::get('/', function () {
-            $products = Product::all([
-                'limit' => 3, // Adjust the limit as needed
-            ]);
-            return Inertia::render('Subscribe', [
-                'stripeKey' => config('cashier.key'),
-                'products' => $products,
-            ]);
-        })->name('index');
-        Route::get('/subscribe', [SubscribeController::class, 'redirectToCheckout'])->name('subscribe');
-        Route::get('/subscription/success', function () {
-            return view('subscription.success');
-        })->name('subscription.success');
-
-        Route::get('/subscription/cancel', function () {
-            return view('subscription.cancel');
-        })->name('subscription.cancel');
-    });
 });
+
 
 require __DIR__ . '/auth.php';

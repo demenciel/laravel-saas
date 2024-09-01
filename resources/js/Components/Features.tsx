@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FaCode, FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe } from "react-icons/fa";
+import { FaCode, FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe, FaDatabase } from "react-icons/fa";
 
 const features = [
     {
@@ -15,9 +15,9 @@ const features = [
         icon: <FaKey className="w-8 h-8 text-primary" />
     },
     {
-        title: "TypeScript & Tailwind Combined",
-        description: "Use TypeScript for type safety and Tailwind CSS for fast, utility-first styling. This combination helps you create responsive interfaces efficiently while keeping your code clean and maintainable.",
-        icon: <FaCode className="w-8 h-8 text-primary" />
+        title: "SQLite for Easy Setup",
+        description: "Use SQLite for a lightweight and easy-to-setup database solution. Perfect for development and testing environments, SQLite allows you to get started quickly without the need for complex database configurations.",
+        icon: <FaDatabase className="w-8 h-8 text-primary" />
     },
     {
         title: "Laravel",
@@ -35,7 +35,6 @@ const features = [
         icon: <FaSearch className="w-8 h-8 text-primary" />
     },
 ];
-
 
 const FeatureCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,7 +63,6 @@ const FeatureCarousel = () => {
                     Build Your Next Project Faster with Pre-Configured Integrations and Tools. <br /> Explore Our Key Features Below.
                 </h6>
 
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, index) => (
                         <motion.div
@@ -75,7 +73,7 @@ const FeatureCarousel = () => {
                             whileHover={{ scale: 1.05 }}
                             className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300"
                         >
-                            <div className="mb-4  rounded-lg w-16 h-16 flex items-center justify-center ">
+                            <div className="mb-4 rounded-lg w-16 h-16 flex items-center justify-center">
                                 {feature.icon}
                             </div>
                             <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">

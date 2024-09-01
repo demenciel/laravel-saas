@@ -5,7 +5,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,6 +13,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
         password: '',
         remember: false,
     });
+    const appUrl = usePage().props.appUrl;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -24,7 +25,18 @@ export default function Login({ status, canResetPassword }: { status?: string, c
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head>
+                <title>Log in</title>
+                <meta name="description" content="The login page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
+                <meta property="og:title" content="Dashboard" />
+                <meta property="og:description" content="The login page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta property="og:url" content={`${appUrl}/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Login" />
+                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+            </Head>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
@@ -92,14 +104,20 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                 </div>
             </form>
             <div className='w-full border-t border-primary my-4'></div>
-            <div className='flex flex-col md:flex-row items-center justify-between'>
+            <div className='flex flex-col items-center justify-between'>
                 <a href={route('facebook.login')} className="w-full flex items-center justify-center mt-4">
-                    <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <PrimaryButton className="flex items-center justify-center p-2 rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <svg className="h-6 w-6 text-white mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.675 0h-21.35C.595 0 0 .595 0 1.325v21.351C0 23.405.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.595 1.325-1.324V1.325C24 .595 23.405 0 22.675 0z"/>
+                        </svg>
                         <span className="text-white">Log in with Facebook</span>
                     </PrimaryButton>
                 </a>
                 <a href={route('google.login')} className="w-full flex items-center justify-center mt-4">
                     <PrimaryButton className="ms-4 flex items-center justify-center p-2 rounded-full bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        <svg className="h-6 w-6 text-white mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
+                            <path d="M24 9.5c3.9 0 6.6 1.7 8.1 3.1l6-5.8C34.8 3.5 29.8 1 24 1 14.7 1 7.1 6.9 4.1 15.1l7.1 5.5C12.8 13.1 17.9 9.5 24 9.5zM9.9 28.5c-1.1-3.3-1.1-6.9 0-10.2L2.8 12.8C.9 16.4 0 20.1 0 24s.9 7.6 2.8 11.2l7.1-5.5zM24 38.5c-4.1 0-7.8-1.6-10.6-4.2l-7.1 5.5C7.1 41.1 14.7 47 24 47c5.8 0 10.8-2.5 14.1-6.4l-7.1-5.5c-1.5 1.4-4.2 3.4-8.1 3.4zM43.6 20.3H24v7.4h11.1c-1.1 3.1-3.4 5.7-6.4 7.4l7.1 5.5c4.1-3.8 6.4-9.4 6.4-15.9 0-1.1-.1-2.2-.3-3.3z"/>
+                        </svg>
                         <span className="ms-2 text-white">Log in with Google</span>
                     </PrimaryButton>
                 </a>

@@ -4,7 +4,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,6 +13,7 @@ export default function Register() {
         password: '',
         password_confirmation: '',
     });
+    const appUrl = usePage().props.appUrl;
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -24,7 +25,18 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head>
+                <title>Sign up</title>
+                <meta name="description" content="The signup page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
+                <meta property="og:title" content="Dashboard" />
+                <meta property="og:description" content="The signup page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta property="og:url" content={`${appUrl}/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Signup" />
+                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+            </Head>
 
             <form onSubmit={submit}>
                 <div>

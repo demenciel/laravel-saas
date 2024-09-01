@@ -6,14 +6,12 @@ import { PageProps } from '@/types';
 
 export default function Subscribe({ auth, mustVerifyEmail, status }: PageProps<{ mustVerifyEmail: boolean, status?: string }>) {
 
-    const products = usePage().props.products;
+    const appUrl = usePage().props.url;
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [sessionId, setSessionId] = useState('');
     useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
-
         if (query.get('success')) {
             setSuccess(true);
             setSessionId(query.get('session_id') || '');
@@ -30,9 +28,20 @@ export default function Subscribe({ auth, mustVerifyEmail, status }: PageProps<{
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Subscribe</h2>}
         >
-            <Head title="Profile" />
+            <Head>
+                <title>Subscribe</title>
+                <meta name="description" content="The Subscribe page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
+                <meta property="og:title" content="Subscribe" />
+                <meta property="og:description" content="The Subscribe page for your Saas business built using TechnoSaas Boilerplate" />
+                <meta property="og:url" content={`${appUrl}/`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Subscribe" />
+                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+            </Head>
 
             <div className="py-12">
             </div>
