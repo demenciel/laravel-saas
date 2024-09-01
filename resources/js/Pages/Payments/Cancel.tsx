@@ -44,7 +44,7 @@ export default function Cancel({ auth }: PageProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                             <h1 className="text-3xl font-bold text-center text-red-600">Payment Cancelled!</h1>
-                            <p className="text-center text-gray-700 dark:text-gray-300">{message}</p>
+                            <p className="text-center text-gray-700 dark:text-gray-300">{String(message)}</p>
                             <div className="text-center mt-6">
                                 <p className="text-xl text-gray-700 dark:text-gray-300">Redirecting in {countdown} seconds...</p>
                             </div>

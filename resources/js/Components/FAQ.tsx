@@ -32,9 +32,9 @@ const FAQ = () => {
     };
 
     return (
-        <section className="py-16 md:py-24 bg-gray-100 dark:bg-transparent">
+        <section className="py-16 md:py-24 ">
             <div className="container mx-auto">
-                <h6 className="text-xl font-bold text-center mb-4 text-gray-800 dark:text-primary">
+                <h6 className="text-xl font-bold text-center mb-4 text-primary">
                     FAQ
                 </h6>
                 <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
@@ -51,10 +51,17 @@ const FAQ = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300"
                         >
-                            <div
+                            <motion.div
+                                initial="collapsed"
+                                animate={activeIndex === index ? "expanded" : "collapsed"}
+                                variants={{
+                                    expanded: { height: "auto" },
+                                    collapsed: { height: "auto" }
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
                                 className="cursor-pointer"
                                 onClick={() => toggleFAQ(index)}
                             >
@@ -80,7 +87,7 @@ const FAQ = () => {
                                         </p>
                                     </motion.div>
                                 )}
-                            </div>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </div>

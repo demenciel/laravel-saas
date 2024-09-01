@@ -1,14 +1,47 @@
 <?php
 
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Stripe\Product;
-use Stripe\Stripe;
 
+
+/*
+|--------------------------------------------------------------------------
+| Welcome to TechnoSaas Routes
+|--------------------------------------------------------------------------
+|
+| This file contains the route definitions for your TechnoSaas application.
+| Here you'll find routes for various features including:
+|
+| - Welcome page
+| - Social authentication (Facebook, Google)
+| - Password reset and forgot password functionality
+| - Payment processing
+| - User profile management
+| - Dashboard access
+|
+| Feel free to add or modify routes as your application grows.
+| Remember to keep your routes organized and well-commented for easy maintenance.
+*/
+
+
+
+
+/* ------------------------------
+    WELCOME ROUTES
+------------------------------ */
+
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+/* ------------------------------
+    SOCIAL ROUTES
+------------------------------ */
 Route::prefix('facebook')->name('facebook.')->group(function () {
     Route::get('auth', [FacebookController::class, 'loginUsingFacebook'])->name('login');
     Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
@@ -19,35 +52,9 @@ Route::prefix('google')->name('google.')->group(function () {
     Route::get('callback', [GoogleController::class, 'handleGoogleCallback'])->name('callback');
 });
 
-Route::get('/', function () {
-    \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-    $products = \Stripe\Product::all([
-        'limit' => 3,
-        'active' => true,
-    ]);
-
-    foreach ($products->data as $product) {
-        $prices = \Stripe\Price::all([
-            'product' => $product->id,
-        ]);
-        $product->prices = $prices->data;
-    }
-    return Inertia::render('Welcome', [
-        'appUrl' =>  env('APP_URL'),
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'products' => $products,
-        'csrf'  => csrf_token(),
-        'stripeKey' => config('cashier.key'),
-    ]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'appUrl' =>  env('APP_URL'),
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+/* ------------------------------
+    PAYMENTS ROUTES
+------------------------------ */
 Route::prefix('payments')->name('payments.')->group(function () {
     Route::post('/redirect-to-one-time-checkout', [PaymentsController::class, 'redirectToOneTimeCheckout'])->name('one-time-checkout');
     Route::get('/download', [PaymentsController::class, 'downloadBoilerplate'])->name('download');
@@ -55,12 +62,16 @@ Route::prefix('payments')->name('payments.')->group(function () {
     Route::get('/cancel', [PaymentsController::class, 'paymentCancel'])->name('cancel');
 });
 
+/* ------------------------------
+    PROTECTED ROUTES
+------------------------------ */
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
     });
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 

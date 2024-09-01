@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function ResetPassword({ token, email }: { token: string, email: string }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,6 +14,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
         password: '',
         password_confirmation: '',
     });
+    const { theme } = useTheme();
     const appUrl = usePage().props.url;
 
     const submit: FormEventHandler = (e) => {
@@ -47,6 +49,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                         id="email"
                         type="email"
                         name="email"
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
@@ -63,6 +66,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                         id="password"
                         type="password"
                         name="password"
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
@@ -79,6 +83,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                     <TextInput
                         type="password"
                         name="password_confirmation"
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"

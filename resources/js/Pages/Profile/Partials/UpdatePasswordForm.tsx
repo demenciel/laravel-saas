@@ -5,10 +5,12 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function UpdatePasswordForm({ className = '' }: { className?: string }) {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
+    const { theme } = useTheme();
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
         current_password: '',
@@ -54,7 +56,7 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
 
                     <TextInput
                         id="current_password"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         ref={currentPasswordInput}
                         value={data.current_password}
                         onChange={(e) => setData('current_password', e.target.value)}
@@ -71,7 +73,7 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
 
                     <TextInput
                         id="password"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         ref={passwordInput}
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
@@ -91,7 +93,7 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         type="password"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                     />

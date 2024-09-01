@@ -4,17 +4,29 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { useTheme } from '@/Hooks/useTheme';
+import { Snackbar } from '@mui/material';
+import { useSnackbar } from '@/Hooks/SnackbarProvider';
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
     const appUrl = usePage().props.appUrl;
-
+    const { showSnackbar } = useSnackbar();
+    const { theme } = useTheme();
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
-        post(route('password.email'));
+        if (data.email === '') {
+            showSnackbar('Please enter your email address.', 'error');
+            return;
+        }
+        try {
+            post(route('password.forgot'));
+            showSnackbar('Email sent successfully.', 'success');
+        } catch (error) {
+            showSnackbar('Something went wrong.', 'error');
+        }
     };
 
     return (
@@ -43,15 +55,13 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 <TextInput
                     id="email"
                     type="email"
-                    style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+                    style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                     name="email"
                     value={data.email}
                     className="mt-1 block w-full"
                     isFocused={true}
                     onChange={(e) => setData('email', e.target.value)}
                 />
-
-                <InputError message={errors.email} className="mt-2" />
 
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ms-4" disabled={processing}>

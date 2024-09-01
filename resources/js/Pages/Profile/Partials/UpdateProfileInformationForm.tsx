@@ -6,6 +6,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { FormEventHandler } from 'react';
 import { PageProps } from '@/types';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }: { mustVerifyEmail: boolean, status?: string, className?: string }) {
     const user = usePage<PageProps>().props.auth.user;
@@ -14,6 +15,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         name: user.name,
         email: user.email,
     });
+    const { theme } = useTheme();
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -37,7 +39,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="name"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
@@ -54,7 +56,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                     <TextInput
                         id="email"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}

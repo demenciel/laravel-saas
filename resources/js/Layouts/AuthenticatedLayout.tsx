@@ -10,14 +10,14 @@ export default function Authenticated({ user, header, children }: PropsWithChild
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen dark bg-white shadow-md overflow-hidden bg-gray-50 text-black/50 dark:bg-black/90 dark:text-white/50">
+        <div className="min-h-screen shadow-md overflow-hidden bg-gray-50 text-black/50 dark:bg-black/90 dark:text-white/50">
             <nav className="border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex ">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo width={84} height={84} />
                                 </Link>
                             </div>
 
@@ -57,7 +57,6 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')} >Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('subscribe.index')} >Subscribe</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button" >
                                             Log Out
                                         </Dropdown.Link>

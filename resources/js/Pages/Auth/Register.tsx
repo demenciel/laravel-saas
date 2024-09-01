@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,6 +15,7 @@ export default function Register() {
         password_confirmation: '',
     });
     const appUrl = usePage().props.appUrl;
+    const { theme } = useTheme();
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -45,7 +47,7 @@ export default function Register() {
                     <TextInput
                         id="name"
                         name="name"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         value={data.name}
                         className="mt-1 block w-full"
                         autoComplete="name"
@@ -63,7 +65,7 @@ export default function Register() {
                     <TextInput
                         id="email"
                         type="email"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -80,7 +82,7 @@ export default function Register() {
 
                     <TextInput
                         id="password"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         type="password"
                         name="password"
                         value={data.password}
@@ -98,7 +100,7 @@ export default function Register() {
 
                     <TextInput
                         id="password_confirmation"
-                        style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}

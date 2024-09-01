@@ -6,10 +6,12 @@ import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function DeleteUserForm({ className = '' }: { className?: string }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef<HTMLInputElement>(null);
+    const { theme } = useTheme();
 
     const {
         data,
@@ -74,6 +76,7 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
                         <TextInput
                             id="password"
                             type="password"
+                            style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                             name="password"
                             ref={passwordInput}
                             value={data.password}

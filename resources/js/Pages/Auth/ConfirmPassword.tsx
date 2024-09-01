@@ -5,13 +5,14 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import { useTheme } from '@/Hooks/useTheme';
 
 export default function ConfirmPassword() {
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });
     const appUrl = usePage().props.appUrl;
-
+    const { theme } = useTheme();
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
@@ -47,6 +48,7 @@ export default function ConfirmPassword() {
                         id="password"
                         type="password"
                         name="password"
+                        style={{ background: theme === 'dark' ? '#171717' : '#fff' }}
                         value={data.password}
                         className="mt-1 block w-full"
                         isFocused={true}

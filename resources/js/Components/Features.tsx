@@ -6,7 +6,7 @@ import { FaCode, FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe, FaDatabase } f
 const features = [
     {
         title: "Stripe Integration",
-        description: "Easily manage payments with our Stripe integration, supporting one-time payments and subscriptions. With built-in support for secure transactions, you can streamline your payment processes.",
+        description: "Easily manage payments with our Stripe integration, supporting one-time payments and subscriptions. No more wasting time setting up Stripe logic.",
         icon: <FaStripe className="w-12 h-12 text-primary" />
     },
     {
@@ -36,24 +36,14 @@ const features = [
     },
 ];
 
-const FeatureCarousel = () => {
+const Features = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % features.length);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? features.length - 1 : prevIndex - 1
-        );
-    };
-
     return (
-        <section className="py-16 md:py-24 bg-gray-100 dark:bg-transparent">
+        <section className="py-16 md:py-24">
             <div className="container mx-auto">
 
-                <h6 className="text-xl font-bold text-center mb-4 text-gray-800 dark:text-primary">
+                <h6 className="text-xl font-bold text-center mb-4 text-primary">
                     Features
                 </h6>
                 <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
@@ -91,4 +81,4 @@ const FeatureCarousel = () => {
     );
 };
 
-export default FeatureCarousel;
+export default Features;

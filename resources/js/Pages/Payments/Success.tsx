@@ -8,18 +8,22 @@ export default function Success({ auth }: PageProps) {
     const appUrl = usePage().props.appUrl;
     const message = usePage().props.message || 'Your payment has been created successfully!';
     const file_url = usePage().props.file_url;
+    const [countDown, setCountdown] = useState<number>(5);
 
-    const [countDown, setCountdown] = useState<number>(0);
-
-
-
+    useEffect(() => {
+        if (typeof file_url === 'string' && file_url) {
+            setTimeout(() => {
+                window.location.href = file_url;
+            }, 1000);
+        }
+    }, [file_url]);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setCountdown((prevCount) => prevCount - 1);
-        }, 5000);
-        if (file_url) {
-            window.location.href = file_url;
+        }, 1000);
+        if (countDown <= 0) {
+            window.location.href = '/';
         }
 
         return () => {
@@ -47,7 +51,8 @@ export default function Success({ auth }: PageProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <h1 className="text-3xl font-bold text-center text-green-600">Payment Successful!</h1>
-                            <p className="text-center text-gray-700 dark:text-gray-300">{message}</p>
+                            <p className="text-center text-gray-700 dark:text-gray-300">{String(message)}</p> // Cast message to string
+
                             <div className="text-center mt-6">
                                 <p className="text-xl text-gray-700 dark:text-gray-300">Redirecting in {countDown} seconds...</p>
                             </div>

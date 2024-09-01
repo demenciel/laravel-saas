@@ -8,6 +8,8 @@ interface AuthProps {
 }
 import { useState } from 'react';
 import ApplicationLogo from './ApplicationLogo';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '@/Hooks/useTheme';
 
 const Navbar = ({ auth }: { auth: AuthProps }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +28,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                     <div className="hidden sm:flex sm:items-center">
                         <Link
                             href="#products"
-                            className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Products
                         </Link>
@@ -35,21 +37,22 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                         {auth.user ? (
                             <Link
                                 href={route('dashboard')}
-                                className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             >
                                 Dashboard
                             </Link>
                         ) : (
                             <>
+                                <ThemeToggle />
                                 <Link
                                     href={route('login')}
-                                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign in
                                 </Link>
                                 <Link
                                     href={route('register')}
-                                    className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign up
                                 </Link>
@@ -91,7 +94,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                     >
                         <Link
                             href="#products"
-                            className="block rounded-md px-3 py-2 text-base font-medium text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Products
                         </Link>
@@ -104,7 +107,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                         >
                             <Link
                                 href={route('dashboard')}
-                                className="block rounded-md px-3 py-2 text-base font-medium text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                             >
                                 Dashboard
                             </Link>
@@ -118,7 +121,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                             >
                                 <Link
                                     href={route('login')}
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign in
                                 </Link>
@@ -130,7 +133,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                             >
                                 <Link
                                     href={route('register')}
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign up
                                 </Link>

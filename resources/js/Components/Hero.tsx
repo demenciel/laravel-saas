@@ -1,8 +1,7 @@
-import React from 'react'
 import { Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 
-const Header = () => {
+const Hero = () => {
     return (
         <div className="container h-[75vh] flex items-center justify-center mx-auto">
             <div className="w-full flex flex-col items-center text-center relative overflow-hidden">
@@ -42,7 +41,7 @@ const Header = () => {
                                 href='#products'
                                 className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-transform duration-300 hover:bg-primary/90 hover:scale-105 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group"
                             >
-                                <span className="relative z-10 text-gray-800 dark:text-white font-bold">Get Started</span>
+                                <span className="relative z-10 text-white font-bold">Get Started</span>
                                 <motion.div
                                     className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20"
                                     initial={{ scale: 0, x: "-50%", y: "-50%" }}
@@ -74,4 +73,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Hero
