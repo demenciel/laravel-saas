@@ -1,25 +1,41 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { FaCode, FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe } from "react-icons/fa";
 
 const features = [
     {
         title: "Stripe Integration",
-        description: "Basic Stripe integration for handling payments seamlessly.",
+        description: "Easily manage payments with our Stripe integration, supporting one-time payments and subscriptions. With built-in support for secure transactions, you can streamline your payment processes.",
+        icon: <FaStripe className="w-12 h-12 text-primary" />
     },
     {
         title: "Laravel Breeze & Socialite",
-        description: "Auth handling with Google, Facebook, and email login support.",
+        description: "Manage user authentication with Laravel Breeze, including support for Google, Facebook, and email logins. Our setup makes it easy to get started with secure and reliable user sign-ups.",
+        icon: <FaKey className="w-8 h-8 text-primary" />
     },
     {
-        title: "TypeScript & Tailwind",
-        description: "Using TypeScript for type safety and Tailwind for utility-first styling.",
+        title: "TypeScript & Tailwind Combined",
+        description: "Use TypeScript for type safety and Tailwind CSS for fast, utility-first styling. This combination helps you create responsive interfaces efficiently while keeping your code clean and maintainable.",
+        icon: <FaCode className="w-8 h-8 text-primary" />
     },
     {
         title: "Laravel",
-        description: "A powerful PHP framework that provides a solid foundation for web development.",
+        description: "Built on Laravel, a popular PHP framework, our boilerplate provides a solid foundation for your web application development, ensuring a smooth and efficient workflow.",
+        icon: <FaLaravel className="w-8 h-8 text-primary" />
+    },
+    {
+        title: "Responsive Design",
+        description: "Ensure your app looks great on all devices with our fully responsive design. The layout adapts seamlessly to different screen sizes, providing a consistent user experience.",
+        icon: <FaDesktop className="w-8 h-8 text-primary" />
+    },
+    {
+        title: "SEO Optimized",
+        description: "Enhance your app's search engine visibility with our built-in SEO features. From optimized meta tags to clean HTML, our boilerplate is designed to help your application perform well online.",
+        icon: <FaSearch className="w-8 h-8 text-primary" />
     },
 ];
+
 
 const FeatureCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,42 +52,41 @@ const FeatureCarousel = () => {
 
     return (
         <section className="py-16 md:py-24 bg-gray-100 dark:bg-transparent">
-            <div className="container px-4 mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-                    Key Features
+            <div className="container mx-auto">
+
+                <h6 className="text-xl font-bold text-center mb-4 text-gray-800 dark:text-primary">
+                    Features
+                </h6>
+                <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
+                    Discover What Makes Our SaaS Boilerplate Stand Out
                 </h2>
-                <div className="relative">
-                    <motion.div
-                        key={currentIndex}
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ duration: 0.5 }}
-                        className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-center"
-                    >
-                        <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
-                            {features[currentIndex].title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                            {features[currentIndex].description}
-                        </p>
-                    </motion.div>
-                    <div className="absolute inset-y-0 left-0 flex items-center">
-                        <button
-                            onClick={handlePrev}
-                            className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+                <h6 className="text-lg text-center text-gray-700 dark:text-gray-300 mb-8">
+                    Build Your Next Project Faster with Pre-Configured Integrations and Tools. <br /> Explore Our Key Features Below.
+                </h6>
+
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {features.map((feature, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.2 }}
+                            whileHover={{ scale: 1.05 }}
+                            className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300"
                         >
-                            &#8592;
-                        </button>
-                    </div>
-                    <div className="absolute inset-y-0 right-0 flex items-center">
-                        <button
-                            onClick={handleNext}
-                            className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full"
-                        >
-                            &#8594;
-                        </button>
-                    </div>
+                            <div className="mb-4  rounded-lg w-16 h-16 flex items-center justify-center ">
+                                {feature.icon}
+                            </div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                                {feature.title}
+                            </h3>
+                            <hr className="h-0.5 bg-primary rounded-lg mb-6 w-8" />
+                            <p className="text-gray-600 dark:text-gray-300">
+                                {feature.description}
+                            </p>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
