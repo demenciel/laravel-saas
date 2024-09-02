@@ -68,10 +68,10 @@ export default function PriceCards({ products = [], csrf }: SubscriptionCardProp
                         Pricing
                     </h6>
                     <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
-                        One-Time Purchase Plans
+                        Affordable SaaS Boilerplate Pricing <br /> One-Time Purchase Plans
                     </h2>
                     <h6 className="text-lg text-center text-gray-700 dark:text-gray-300 mb-8">
-                        Build Your Next Project Faster with Pre-Configured Integrations and Tools. <br /> Explore Our One-Time Purchase Plans Below.
+                        Build Your Next Project Faster with Pre-Configured Integrations and Tools.
                     </h6>
 
                     <div className={`grid gap-8 justify-center ${products.length === 1 ? 'justify-center' : products.length === 2 ? 'sm:grid-cols-1 md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>

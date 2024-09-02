@@ -42,10 +42,10 @@ const Features = () => {
                     Features
                 </h5>
                 <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
-                    Discover What Makes Our SaaS Boilerplate Stand Out
+                    Discover the Best SaaS Boilerplate: TechnoSaas Features
                 </h2>
-                <h6 className="text-lg text-center text-gray-700 dark:text-gray-300 mb-8">
-                    Build Your Next Project Faster with Pre-Configured Integrations and Tools. <br /> Explore Our Key Features Below.
+                <h6 className="text-lg text-center text-gray-700 dark:text-gray-300 mb-8 max-w-[700px] mx-auto">
+                    Easily manage payments with our Stripe integration, supporting one-time payments and subscriptions. Built into TechnoSaas, this feature saves you time and effort, allowing you to focus on developing your SaaS product.
                 </h6>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
