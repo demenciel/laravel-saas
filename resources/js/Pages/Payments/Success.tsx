@@ -20,11 +20,14 @@ export default function Success({ auth }: PageProps) {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCountdown((prevCount) => prevCount - 1);
+            setCountdown((prevCount) => {
+                if (prevCount <= 1) {
+                    clearInterval(timer);
+                    window.location.href = '/';
+                }
+                return prevCount - 1;
+            });
         }, 1000);
-        if (countDown <= 0) {
-            window.location.href = '/';
-        }
 
         return () => {
             clearInterval(timer);
@@ -32,8 +35,8 @@ export default function Success({ auth }: PageProps) {
     }, [appUrl, file_url]);
 
     return (
-        <div className="dark bg-gray-50 text-black/50 min-h-screen dark:bg-black/90 dark:text-white/50">
-            <section className="pb-16 md:py-16 bg-gray-100 dark:bg-transparent">
+        <div className="bg-gray-50 text-black/50 min-h-screen dark:bg-black/90 dark:text-white/50">
+            <section className="pb-16 md:py-16 ">
                 <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="/hero-blur.png" />
                 <Navbar auth={auth} />
                 <div className="relative flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
@@ -51,7 +54,7 @@ export default function Success({ auth }: PageProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <h1 className="text-3xl font-bold text-center text-green-600">Payment Successful!</h1>
-                            <p className="text-center text-gray-700 dark:text-gray-300">{String(message)}</p> // Cast message to string
+                            <p className="text-center text-gray-700 dark:text-gray-300">{String(message)}</p>
 
                             <div className="text-center mt-6">
                                 <p className="text-xl text-gray-700 dark:text-gray-300">Redirecting in {countDown} seconds...</p>

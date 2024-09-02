@@ -2,28 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DownloadLinkEmail;
+use App\Services\PaymentsService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Stripe\Checkout\Session;
 
 class PaymentsController extends Controller
 {
+    protected $paymentsService;
+
+    public function __construct(PaymentsService $paymentsService)
+    {
+        $this->paymentsService = $paymentsService;
+    }
+
+    public function redirectToSubscriptionCheckout(Request $request)
+    {
+        $checkout_session = $this->paymentsService->redirectToCheckout(
+            $request->input('price_id'),
+            route('payments.success'),
+            route('payments.cancel'),
+            'subscription'
+        );
+        return redirect($checkout_session->url);
+    }
 
     public function redirectToOneTimeCheckout(Request $request)
     {
-        $price_id = $request->input('price_id');
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        $checkout_session = Session::create([
-            'mode' => 'payment',
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price' => $price_id, // Assuming you store price IDs in your Stripe dashboard
-                'quantity' => 1,
-            ]],
-            'success_url' => route('payments.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('payments.cancel'),
-        ]);
+        $checkout_session = $this->paymentsService->redirectToCheckout(
+            $request->input('price_id'),
+            route('payments.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            route('payments.cancel'),
+            'payment'
+        );
         return redirect($checkout_session->url);
     }
 
@@ -34,11 +47,20 @@ class PaymentsController extends Controller
         $session = \Stripe\Checkout\Session::retrieve($session_id);
 
         if ($session->payment_status == 'paid') {
+            $this->paymentsService->sendDownloadLink($session->customer_details->email);
             return Inertia::render('Payments/Success', [
-                'file_url' => route('payments.download'), // Pass download URL
+                'file_url' => route('payments.download'),
             ]);
         }
 
+        return Inertia::render('Payments/Success', [
+            'message' => 'Your payment was successful!',
+            'appUrl' => env('APP_URL'),
+        ]);
+    }
+
+    public function paymentSubscriptionSuccess()
+    {
         return Inertia::render('Payments/Success', [
             'message' => 'Your payment was successful!',
             'appUrl' => env('APP_URL'),

@@ -13,8 +13,7 @@ Sure, I'd be happy to help you build comprehensive documentation for your **Tech
 2. [Prerequisites](#2-prerequisites)
 3. [Installation](#3-installation)
     - [3.1 Local Installation](#31-local-installation)
-    - [3.2 Docker Installation](#32-docker-installation)
-    - [3.3 Laravel Herd Installation](#33-laravel-herd-installation)
+    - [3.2 Laravel Herd Installation](#33-laravel-herd-installation)
 4. [Configuration](#4-configuration)
     - [4.1 Environment Variables](#41-environment-variables)
     - [4.2 Database Setup](#42-database-setup)
@@ -138,15 +137,11 @@ npm run dev
 
 Your application should now be running at `http://localhost:8000`.
 
-### 3.2. Docker Installation
+### 3.2. Laravel Herd Installation
 
-#### 3.2.1. Ensure Docker is Running
+#### 3.2.1. Ensure Laravel Herd is Installed
 
-Make sure Docker is installed and running on your system. You can verify this by running:
-
-```bash
-docker --version
-```
+Install Laravel Herd by following the official documentation: [Laravel Herd Installation Guide](https://laravel.com/docs/herd)
 
 #### 3.2.2. Clone the Repository
 
@@ -155,50 +150,7 @@ git clone https://github.com/yourusername/technosaas-boilerplate.git
 cd technosaas-boilerplate
 ```
 
-#### 3.2.3. Build and Start Containers
-
-Use the provided **Makefile** to manage Docker operations.
-
-**Start Containers:**
-
-```bash
-make up
-```
-
-This command will build and start all necessary containers in detached mode.
-
-#### 3.2.4. Run Database Migrations
-
-```bash
-make migrate
-```
-
-#### 3.2.5. Access the Application
-
--   The application will be accessible at `http://localhost`.
--   You can check the status of running containers:
-    ```bash
-    make status
-    ```
-
-#### 3.2.6. Additional Docker Commands
-
-See the [Makefile Commands](#6-makefile-commands) section for more operations like stopping containers, accessing shell, and viewing logs.
-
-### 3.3. Laravel Herd Installation
-
-#### 3.3.1. Ensure Laravel Herd is Installed
-
-Install Laravel Herd by following the official documentation: [Laravel Herd Installation Guide](https://laravel.com/docs/herd)
-
-#### 3.3.2. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/technosaas-boilerplate.git
-cd technosaas-boilerplate
-```
-
-#### 3.3.3. Install Dependencies
+#### 3.2.3. Install Dependencies
 
 **Install PHP Dependencies:**
 
@@ -212,7 +164,7 @@ composer install
 npm install
 ```
 
-#### 3.3.4. Configure Environment Variables
+#### 3.2.4. Configure Environment Variables
 
 -   Create a copy of the example environment file:
     ```bash
@@ -220,19 +172,19 @@ npm install
     ```
 -   Update the `.env` file with your specific configuration details.
 
-#### 3.3.5. Generate Application Key
+#### 3.2.5. Generate Application Key
 
 ```bash
 php artisan key:generate
 ```
 
-#### 3.3.6. Run Database Migrations
+#### 3.2.6. Run Database Migrations
 
 ```bash
 php artisan migrate
 ```
 
-#### 3.3.7. Serve the Application
+#### 3.2.7. Serve the Application
 
 Laravel Herd will automatically serve your application. Access it via the URL provided by Herd, typically `http://technosaas-boilerplate.test`.
 
@@ -353,7 +305,6 @@ technosaas-boilerplate/
 ├── tests/
 │   ├── Feature/
 │   └── Unit/
-├── docker-compose.yml
 ├── Makefile
 ├── package.json
 ├── composer.json
@@ -376,26 +327,7 @@ technosaas-boilerplate/
 
 The provided **Makefile** simplifies various development tasks. Below are the available commands and their descriptions.
 
-### 6.1. Utility Commands
-
-| Command            | Description                                          |
-| ------------------ | ---------------------------------------------------- |
-| `make help`        | Displays help information for all available commands |
-| `make up`          | Starts Docker containers in detached mode            |
-| `make down`        | Stops and removes Docker containers                  |
-| `make reup`        | Restarts Docker containers                           |
-| `make status`      | Checks the status of Docker containers               |
-| `make logs`        | Shows live logs for all containers                   |
-| `make logs-[svc]`  | Shows live logs for a specific service               |
-| `make shell-[svc]` | Opens a shell in the specified container             |
-| `make clean`       | Stops containers and removes volumes                 |
-| `make fclean`      | Removes containers, images, and prunes the system    |
-| `make build-[svc]` | Builds a specific Docker service                     |
-| `make run-[svc]`   | Runs a specific Docker service                       |
-
-**Note:** Replace `[svc]` with the service name defined in `docker-compose.yml` (e.g., `app`, `db`, `nginx`).
-
-### 6.2. Laravel Commands
+### 6.1. Laravel Commands
 
 | Command           | Description                             |
 | ----------------- | --------------------------------------- |
@@ -471,12 +403,12 @@ Enable users to log in using their **Google** or **Facebook** accounts.
 
 ### 7.4. Stripe Integration
 
-Seamless payment processing integrated with **Stripe** for handling one-time payments.
+Seamless payment processing integrated with **Stripe** for handling one-time payments and subscriptions.
 
 **Setup:**
 
 -   Add Stripe API keys to the `.env` file.
--   Payment routes and controllers are set up for immediate use.
+-   Payment routes and controllers are set up for immediate use for either one-time payments or subscriptions.
 
 **Features:**
 
@@ -673,7 +605,7 @@ Ensuring the security of your application is paramount. The boilerplate includes
 ### 11.2. Getting Support
 
 -   **Issue Tracker:** Report issues on the project's GitHub repository issue tracker.
--   **Email:** Contact support at [support@technosaas.com](mailto:support@technosaas.com).
+-   **Email:** Contact support at [contacttechnosaas@gmail.com](mailto:contacttechnosaas@gmail.com).
 -   **Community Forum:** Join the community forum at [forum.technosaas.com](https://forum.technosaas.com).
 
 ### 11.3. Contribution Guidelines
@@ -692,39 +624,11 @@ The Technosaas Boilerplate is open-source software licensed under the **MIT Lice
 Permission is hereby granted, free of charge, to any person obtaining a copy...
 ```
 
-(Include the full license text or link to the LICENSE file.)
+Please refer to the [LICENSE](LICENSE/LICENSE.txt) file for the full license text.
 
 ---
 
-## 13. Contributing
-
-We appreciate your interest in contributing to the Technosaas Boilerplate. Please follow these guidelines to contribute:
-
-### 13.1. How to Contribute
-
-1. **Fork the Repository:** Create a personal fork of the repository.
-2. **Clone the Fork:** Clone your fork to your local machine.
-3. **Create a Branch:** Create a feature or bugfix branch.
-4. **Make Changes:** Implement your changes and commit them with clear messages.
-5. **Push Changes:** Push your changes to your fork.
-6. **Submit Pull Request:** Open a pull request against the main repository.
-
-### 13.2. Code Standards
-
--   Follow **PSR-12** coding standards for PHP.
--   Maintain consistent coding styles and naming conventions.
--   Write **unit tests** for new features and bug fixes.
-
-### 13.3. Reporting Issues
-
--   Use the GitHub issue tracker to report bugs or request features.
--   Provide detailed descriptions and steps to reproduce issues.
-
-**Thank you for contributing!**
-
----
-
-## 14. Changelog
+## 13. Changelog
 
 **v1.0.0 - September 1, 2024**
 
@@ -733,26 +637,18 @@ We appreciate your interest in contributing to the Technosaas Boilerplate. Pleas
     -   Authentication setup with Laravel Breeze
     -   OAuth integration with Google and Facebook
     -   Stripe payment integration
-    -   Docker support with pre-configured Makefile commands
     -   Responsive design with dark and light mode
     -   SEO optimization features
 
 ---
 
-## 15. Acknowledgments
+## 14. Acknowledgments
 
 We would like to thank the following:
 
 -   **Laravel Team:** For providing an excellent PHP framework.
 -   **React and Inertia.js Teams:** For enabling seamless frontend development.
--   **Open-Source Contributors:** For maintaining the tools and libraries used in this project.
 
 ---
 
-**For any further assistance or inquiries, please contact [support@technosaas.com](mailto:support@technosaas.com).**
-
----
-
-Would you like me to proceed with creating separate detailed guides for **Google OAuth Configuration** and **Facebook OAuth Configuration** as mentioned in section [9.2](#92-google-oauth-configuration) and [9.3](#93-facebook-oauth-configuration)?
-
-Let me know if you need any modifications or additional information included in this documentation!
+**For any further assistance or inquiries, please contact [contacttechnosaas@gmail.com](mailto:contacttechnosaas@gmail.com).**

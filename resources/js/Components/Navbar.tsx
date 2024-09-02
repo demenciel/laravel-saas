@@ -9,7 +9,6 @@ interface AuthProps {
 import { useState } from 'react';
 import ApplicationLogo from './ApplicationLogo';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '@/Hooks/useTheme';
 
 const Navbar = ({ auth }: { auth: AuthProps }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +32,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                             Products
                         </Link>
                     </div>
-                    <div className="hidden sm:flex sm:items-center">
+                    <div className="hidden sm:flex sm:items-center space-x-4">
                         {auth.user ? (
                             <Link
                                 href={route('dashboard')}
@@ -46,13 +45,13 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                                 <ThemeToggle />
                                 <Link
                                     href={route('login')}
-                                    className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="rounded-md px-3 py-2 text-gray-800 mx-2 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign in
                                 </Link>
                                 <Link
                                     href={route('register')}
-                                    className="rounded-md px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    className="rounded-md bg-primary px-3 py-2 text-gray-800 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                 >
                                     Sign up
                                 </Link>
@@ -104,6 +103,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
+                            className='space-x-4'
                         >
                             <Link
                                 href={route('dashboard')}

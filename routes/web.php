@@ -30,9 +30,6 @@ use Illuminate\Support\Facades\Route;
 | Remember to keep your routes organized and well-commented for easy maintenance.
 */
 
-
-
-
 /* ------------------------------
     WELCOME ROUTES
 ------------------------------ */
@@ -57,8 +54,10 @@ Route::prefix('google')->name('google.')->group(function () {
 ------------------------------ */
 Route::prefix('payments')->name('payments.')->group(function () {
     Route::post('/redirect-to-one-time-checkout', [PaymentsController::class, 'redirectToOneTimeCheckout'])->name('one-time-checkout');
+    Route::post('/redirect-to-subscription-checkout', [PaymentsController::class, 'redirectToSubscriptionCheckout'])->name('subscription-checkout');
     Route::get('/download', [PaymentsController::class, 'downloadBoilerplate'])->name('download');
     Route::get('/success', [PaymentsController::class, 'paymentSuccess'])->name('success');
+    Route::get('/success-subscription', [PaymentsController::class, 'paymentSubscriptionSuccess'])->name('success-subscription');
     Route::get('/cancel', [PaymentsController::class, 'paymentCancel'])->name('cancel');
 });
 

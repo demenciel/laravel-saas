@@ -1,7 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { FaCode, FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe, FaDatabase } from "react-icons/fa";
+import { FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe, FaDatabase } from "react-icons/fa";
 
 const features = [
     {
@@ -37,15 +35,12 @@ const features = [
 ];
 
 const Features = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
     return (
         <section className="py-16 md:py-24">
             <div className="container mx-auto">
-
-                <h6 className="text-xl font-bold text-center mb-4 text-primary">
+                <h5 className="text-xl font-bold text-center mb-4 text-primary">
                     Features
-                </h6>
+                </h5>
                 <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
                     Discover What Makes Our SaaS Boilerplate Stand Out
                 </h2>
