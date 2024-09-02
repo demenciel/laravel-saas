@@ -48,7 +48,7 @@ const Hero = () => {
                                     transition={{ duration: 0.4 }}
                                 />
                             </Link>
-                            <a
+                            {/* <a
                                 href='https://github.com/demenciel/laravel-saas'
                                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-transform duration-300 hover:bg-accent hover:text-accent-foreground hover:scale-105 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group"
                             >
@@ -62,7 +62,7 @@ const Hero = () => {
                                     whileHover={{ scale: 1.5 }}
                                     transition={{ duration: 0.4 }}
                                 />
-                            </a>
+                            </a> */}
                         </motion.div>
                     </div>
                 </motion.div>
