@@ -12,7 +12,6 @@ import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ auth }: { auth: AuthProps }) => {
     const [isOpen, setIsOpen] = useState(false);
-
     return (
         <nav className="py-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -20,7 +19,7 @@ const Navbar = ({ auth }: { auth: AuthProps }) => {
                     <div className="flex">
                         <div className="shrink-0 flex items-center">
                             <Link href="/">
-                                <ApplicationLogo height={218} width={218} />
+                                <ApplicationLogo height={146} width={146} />
                             </Link>
                         </div>
                     </div>
