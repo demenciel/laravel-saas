@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { useTheme } from '@/Hooks/useTheme';
+import { useSnackbar } from '@/Hooks/SnackbarProvider';
 
 export default function ResetPassword({ token, email }: { token: string, email: string }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,6 +15,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
         password: '',
         password_confirmation: '',
     });
+    const { showSnackbar } = useSnackbar();
     const { theme } = useTheme();
     const appUrl = usePage().props.url;
 
@@ -21,23 +23,26 @@ export default function ResetPassword({ token, email }: { token: string, email: 
         e.preventDefault();
 
         post(route('password.store'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => {
+                reset('password', 'password_confirmation')
+                showSnackbar('Password reset successfully.', 'success');
+            },
         });
     };
 
     return (
         <GuestLayout>
             <Head>
-                <title>Reset Password</title>
+                <title>Reset Password - TechnoSaas</title>
                 <meta name="description" content="The Reset Password page for your Saas business built using TechnoSaas Boilerplate" />
                 <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
                 <meta property="og:title" content="Dashboard" />
                 <meta property="og:description" content="The Reset Password page for your Saas business built using TechnoSaas Boilerplate" />
-                <meta property="og:url" content={`${appUrl}/`} />
+                <meta property="og:url" content={`${appUrl}/reset-password`} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Reset Password" />
                 <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+                <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
             </Head>
 
 

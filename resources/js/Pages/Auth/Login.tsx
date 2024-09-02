@@ -28,19 +28,21 @@ export default function Login({ status, canResetPassword }: { status?: string, c
     return (
         <GuestLayout>
             <Head>
-                <title>Log in</title>
-                <meta name="description" content="The login page for your Saas business built using TechnoSaas Boilerplate" />
-                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
-                <meta property="og:title" content="Dashboard" />
-                <meta property="og:description" content="The login page for your Saas business built using TechnoSaas Boilerplate" />
-                <meta property="og:url" content={`${appUrl}/`} />
+                <title>Log in - TechnoSaas</title>
+                <meta name="description" content="Log in to your TechnoSaas account to access your dashboard and manage your SaaS business efficiently." />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized, Login" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="TechnoSaas" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta property="og:title" content="Log in - TechnoSaas" />
+                <meta property="og:description" content="Log in to your TechnoSaas account to access your dashboard and manage your SaaS business efficiently." />
+                <meta property="og:url" content={`${appUrl}/login`} />
+                <meta property="og:image" content={`${appUrl}/images/og-image.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Login" />
-                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+                <meta name="twitter:title" content="Log in - TechnoSaas" />
+                <meta name="twitter:description" content="Log in to your TechnoSaas account to access your dashboard and manage your SaaS business efficiently." />
+                <meta name="twitter:image" content={`${appUrl}/images/twitter-image.png`} />
             </Head>
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <div className='dark:text-white/50'>
