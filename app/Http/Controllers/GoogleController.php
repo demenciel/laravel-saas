@@ -13,7 +13,13 @@ class GoogleController extends Controller
      */
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        try {
+            return Socialite::driver('google')->redirect();
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect()->route('login')->with('error', 'Google authentication failed. Please try again.');
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('error', 'Google authentication failed. Please try again.');
+        }
     }
 
     /**
@@ -21,7 +27,13 @@ class GoogleController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect()->route('login')->with('error', 'Google authentication failed. Please try again.');
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('error', 'Google authentication failed. Please try again.');
+        }
         $user = User::where('email', $googleUser->email)->first();
         if (!$user) {
             $user = User::create(['name' => $googleUser->name, 'email' => $googleUser->email, 'password' => Hash::make(rand(100000, 999999))]);

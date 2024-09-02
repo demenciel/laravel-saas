@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,16 +34,8 @@ use Laravel\Socialite\Facades\Socialite;
 /* ------------------------------
     WELCOME ROUTES
 ------------------------------ */
-
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/test-redirect', function () {
-    try {
-        $redirect = Socialite::driver('facebook')->redirect();
-        dd($redirect);
-    } catch (\Exception $e) {
-        dd($e->getMessage(), $e->getTrace());
-    }
-});
+
 /* ------------------------------
     SOCIAL ROUTES
 ------------------------------ */

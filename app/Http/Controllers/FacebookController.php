@@ -16,7 +16,11 @@ class FacebookController extends Controller
      */
     public function loginUsingFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        try {
+            return Socialite::driver('facebook')->redirect();
+        } catch (\Exception $e) {
+            return redirect()->route('login')->with('error', 'Facebook authentication failed. Please try again.');
+        }
     }
 
     /**
@@ -28,6 +32,8 @@ class FacebookController extends Controller
         try {
             $user = Socialite::driver('facebook')->user();
         } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect()->route('login')->with('error', 'Facebook authentication failed. Please try again.');
+        } catch (\Exception $e) {
             return redirect()->route('login')->with('error', 'Facebook authentication failed. Please try again.');
         }
 
