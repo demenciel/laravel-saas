@@ -16,16 +16,17 @@ export default function Welcome({ auth }: PageProps) {
     return (
         <>
             <Head>
-                <title>Welcome</title>
-                <meta name="description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
-                <meta property="og:title" content="Welcome" />
-                <meta property="og:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
+                <title>TechnoSaas - The Ultimate SaaS Boilerplate for Laravel and React</title>
+                <meta name="description" content="Boost your SaaS development with TechnoSaas, a robust Laravel and React boilerplate. Streamline your operations with built-in integrations for Stripe, TypeScript, and more." />
+                <meta name="keywords" content="SaaS boilerplate, TechnoSaas, Laravel React boilerplate, Stripe integration, TypeScript, Tailwind CSS, SaaS development tools, SEO optimized SaaS" />
+                <meta property="og:title" content="TechnoSaas - Your Go-To SaaS Boilerplate" />
+                <meta property="og:description" content="Build your SaaS project faster with TechnoSaas, featuring seamless Laravel and React integration, Stripe, TypeScript, and more." />
                 <meta property="og:url" content={`${appUrl}/`} />
+                <meta property="og:image" content={`${appUrl}/Preview.png`} />
+                <meta name="twitter:title" content="TechnoSaas - Your Go-To SaaS Boilerplate" />
+                <meta name="twitter:description" content="Build your SaaS project faster with TechnoSaas, featuring seamless Laravel and React integration, Stripe, TypeScript, and more." />
+                <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Welcome" />
-                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
             </Head>
             <div className=" text-gray-800 dark:bg-black/90 dark:text-white/50">
                 <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="/hero-blur.png" />

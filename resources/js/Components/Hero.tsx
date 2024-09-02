@@ -19,7 +19,7 @@ const Hero = () => {
                                 transition={{ delay: 0.2, duration: 0.8 }}
                                 className="text-3xl font-bold text-gray-800 dark:text-white  tracking-tighter sm:text-5xl xl:text-6xl/none mb-4"
                             >
-                                Streamline Your <span className='text-primary'>SaaS</span> Operations
+                                Streamline Your SaaS Development with <span className='text-primary'>TechnoSaas</span>
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
@@ -27,8 +27,7 @@ const Hero = () => {
                                 transition={{ delay: 0.4, duration: 0.8 }}
                                 className="max-w-[700px] text-center text-muted-foreground md:text-xl"
                             >
-                                Our boilerplate provides a solid foundation to build your next-generation SaaS application. <br />
-                                It started as a search for Laravel and React boilerplates, but evolved into project that can be used as a starting point for any SaaS application.
+                                TechnoSaas offers a robust SaaS boilerplate built on Laravel and React, designed to accelerate your application development. Perfect for startups and developers, our solution comes pre-configured with essential integrations, including Stripe and TypeScript.
                             </motion.p>
                         </div>
                         <motion.div

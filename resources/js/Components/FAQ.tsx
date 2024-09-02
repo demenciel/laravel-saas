@@ -39,7 +39,7 @@ const FAQ = () => {
                     FAQ
                 </h6>
                 <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">
-                    Frequently Asked Questions
+                    TechnoSaas FAQ: Get All Your Questions Answered
                 </h2>
                 <h6 className="text-lg text-center text-gray-700 dark:text-gray-300 mb-8">
                     Find answers to common questions about TechnoSaas below.

@@ -23,8 +23,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
         }
         try {
             post(route('password.forgot'));
-            showSnackbar('Email sent successfully.', 'success');
+            if (status === 'password.reset') {
+                showSnackbar('Email sent successfully.', 'success');
+            }
         } catch (error) {
+            console.log(error);
             showSnackbar('Something went wrong.', 'error');
         }
     };
@@ -48,8 +51,6 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 Forgot your password? No problem. Just let us know your email address and we will email you a password
                 reset link that will allow you to choose a new one.
             </div>
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
                 <TextInput

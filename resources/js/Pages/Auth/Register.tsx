@@ -28,16 +28,20 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head>
-                <title>Sign up</title>
-                <meta name="description" content="The signup page for your Saas business built using TechnoSaas Boilerplate" />
-                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
-                <meta property="og:title" content="Dashboard" />
-                <meta property="og:description" content="The signup page for your Saas business built using TechnoSaas Boilerplate" />
-                <meta property="og:url" content={`${appUrl}/`} />
+                <title>Sign up - TechnoSaas</title>
+                <meta name="description" content="Sign up for TechnoSaas to access your dashboard and manage your SaaS business efficiently." />
+                <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized, Signup" />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="TechnoSaas" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta property="og:title" content="Sign up - TechnoSaas" />
+                <meta property="og:description" content="Sign up for TechnoSaas to access your dashboard and manage your SaaS business efficiently." />
+                <meta property="og:url" content={`${appUrl}/register`} />
+                <meta property="og:image" content={`${appUrl}/Preview.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Signup" />
-                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+                <meta name="twitter:title" content="Sign up - TechnoSaas" />
+                <meta name="twitter:description" content="Sign up for TechnoSaas to access your dashboard and manage your SaaS business efficiently." />
+                <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
             </Head>
 
             <form onSubmit={submit}>
