@@ -12,7 +12,6 @@ import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ auth }: { auth: AuthProps }) => {
     const [isOpen, setIsOpen] = useState(false);
-
     return (
         <nav className="py-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
