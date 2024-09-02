@@ -9,7 +9,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +35,20 @@ use Illuminate\Support\Facades\Route;
 ------------------------------ */
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-
+Route::get('/test-redirect', function () {
+    try {
+        $redirect = Socialite::driver('facebook')->redirect();
+        dd($redirect);
+    } catch (\Exception $e) {
+        dd($e->getMessage(), $e->getTrace());
+    }
+});
 /* ------------------------------
     SOCIAL ROUTES
 ------------------------------ */
 Route::prefix('facebook')->name('facebook.')->group(function () {
     Route::get('auth', [FacebookController::class, 'loginUsingFacebook'])->name('login');
-    Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
+    Route::get('callback', [FacebookController::class, 'callbackFromFacebook'])->name('callback');
 });
 
 Route::prefix('google')->name('google.')->group(function () {

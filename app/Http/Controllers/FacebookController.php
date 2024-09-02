@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\FacebookService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends Controller
 {
-    protected $facebookService;
-
-    public function __construct(FacebookService $facebookService)
-    {
-        $this->facebookService = $facebookService;
-    }
 
     /**
      * Redirect to Facebook for authentication.
      */
     public function loginUsingFacebook()
     {
-        return $this->facebookService->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
 
     /**
@@ -27,6 +25,27 @@ class FacebookController extends Controller
 
     public function callbackFromFacebook()
     {
-        return $this->facebookService->callback();
+        try {
+            $user = Socialite::driver('facebook')->user();
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect()->route('login')->with('error', 'Facebook authentication failed. Please try again.');
+        }
+
+        $existingUser = User::where('email', $user->getEmail())->first();
+        if (!$existingUser) {
+            $existingUser = User::create([
+                'facebook_id' => $user->getId(),
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => Hash::make($user->getName() . '@' . $user->getId())
+            ]);
+        } else {
+            $existingUser->facebook_id = $user->getId();
+            $existingUser->save();
+        }
+
+        Auth::loginUsingId($existingUser->id);
+
+        return redirect()->route('dashboard');
     }
 }

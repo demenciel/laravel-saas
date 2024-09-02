@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\GoogleService;
+use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
-    protected $googleService;
-
-    public function __construct(GoogleService $googleService)
-    {
-        $this->googleService = $googleService;
-    }
-
     /**
      * Redirect to Google for authentication.
      */
     public function redirectToGoogle()
     {
-        return $this->googleService->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     /**
@@ -26,6 +21,12 @@ class GoogleController extends Controller
      */
     public function handleGoogleCallback()
     {
-        return $this->googleService->callback();
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email', $googleUser->email)->first();
+        if (!$user) {
+            $user = User::create(['name' => $googleUser->name, 'email' => $googleUser->email, 'password' => Hash::make(rand(100000, 999999))]);
+        }
+        auth()->login($user, true);
+        return redirect()->route('dashboard');
     }
 }
