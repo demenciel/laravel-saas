@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\DownloadLinkEmail;
+use App\Models\DownloadLink;
 use App\Services\PaymentsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -46,18 +47,28 @@ class PaymentsController extends Controller
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $session = \Stripe\Checkout\Session::retrieve($session_id);
 
-        if ($session->payment_status == 'paid') {
-            $this->paymentsService->sendDownloadLink($session->customer_details->email);
+        $downloadLink = DownloadLink::where('session_id', $session_id)->first();
+
+        if ($session->payment_status == 'paid' && !$downloadLink) {
+            $this->paymentsService->sendDownloadLink($session->customer_details->email, $session_id);
+            DownloadLink::create([
+                'email' => $session->customer_details->email,
+                'session_id' => $session_id,
+                'downloaded' => false,
+                'sent_at' => now(),
+            ]);
+
             return Inertia::render('Payments/Success', [
-                'file_url' => route('payments.download'),
+                'file_url' => route('payments.download', ['session_id' => $session_id]),
+            ]);
+        } else {
+            return Inertia::render('Payments/Success', [
+                'message' => 'Your payment was successful!',
+                'appUrl' => env('APP_URL'),
             ]);
         }
-
-        return Inertia::render('Payments/Success', [
-            'message' => 'Your payment was successful!',
-            'appUrl' => env('APP_URL'),
-        ]);
     }
+
 
     public function paymentSubscriptionSuccess()
     {
@@ -75,8 +86,19 @@ class PaymentsController extends Controller
         ]);
     }
 
-    public function downloadBoilerplate()
+    public function downloadBoilerplate(Request $request)
     {
+        $session_id = $request->input('session_id');
+        $downloadLink = DownloadLink::where('session_id', $session_id)->first();
+
+        if (!$downloadLink || $downloadLink->downloaded) {
+            // Either the session ID is invalid or the file has already been downloaded
+            return Inertia::render('Payments/Success', [
+                'message' => 'The file has already been downloaded or the link is invalid.',
+                'appUrl' => env('APP_URL'),
+            ]);
+        }
+        $downloadLink->update(['downloaded' => true]);
         $filePath = storage_path('app/technosaas.zip');
         return response()->download($filePath, 'technosaas.zip');
     }

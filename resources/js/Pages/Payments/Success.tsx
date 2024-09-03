@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Head, router, usePage } from '@inertiajs/react';
 import Navbar from '../../Components/Navbar';
 import { PageProps } from '@/types';
+import { FaEnvelope } from 'react-icons/fa'; // Add this import
 
 export default function Success({ auth }: PageProps) {
     const appUrl = usePage().props.appUrl;
@@ -58,6 +59,14 @@ export default function Success({ auth }: PageProps) {
 
                             <div className="text-center mt-6">
                                 <p className="text-xl text-gray-700 dark:text-gray-300">Redirecting in {countDown} seconds...</p>
+                            </div>
+
+                            {/* New memo section */}
+                            <div className="flex items-center space-x-2 mt-4 p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                                <FaEnvelope className="text-blue-500 dark:text-blue-300 text-xl" />
+                                <p className="text-sm text-blue-700 dark:text-blue-200">
+                                    If the download doesn't start automatically, check your email for the download link.
+                                </p>
                             </div>
                         </div>
                     </motion.div>

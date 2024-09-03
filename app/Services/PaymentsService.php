@@ -26,9 +26,10 @@ class PaymentsService
         return $checkout_session;
     }
 
-    public function sendDownloadLink($email)
+    public function sendDownloadLink($email, $session_id)
     {
-        $downloadLink = route('payments.download');
+        // Generate the download link with the session_id as a query parameter
+        $downloadLink = route('payments.download', ['session_id' => $session_id]);
         Mail::to($email)->send(new DownloadLinkEmail($downloadLink));
     }
 }

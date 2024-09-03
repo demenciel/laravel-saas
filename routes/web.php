@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Mail;
 /* ------------------------------
     WELCOME ROUTES
 ------------------------------ */
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 /* ------------------------------
@@ -60,6 +61,14 @@ Route::prefix('payments')->name('payments.')->group(function () {
     Route::get('/success-subscription', [PaymentsController::class, 'paymentSubscriptionSuccess'])->name('success-subscription');
     Route::get('/cancel', [PaymentsController::class, 'paymentCancel'])->name('cancel');
 });
+
+/* ------------------------------
+    STRIPE WEBHOOK ROUTE
+------------------------------ */
+Route::post(
+    'stripe/webhook',
+    [PaymentsController::class, 'handleWebhook']
+)->name('stripe.webhook');
 
 /* ------------------------------
     PROTECTED ROUTES

@@ -29,7 +29,9 @@ class DownloadLinkEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.downloadlink')
-            ->with('downloadLink', $this->downloadLink);
+        return $this->subject('Your Download is Ready!')
+            ->markdown('emails.downloadlink', [
+                'downloadLink' => $this->downloadLink,
+            ]);
     }
 }
