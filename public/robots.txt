@@ -1,0 +1,40 @@
+# robots.txt for Laravel SaaS
+
+# Block access to the following directories and files that should not be indexed by search engines
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /password
+Disallow: /api/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /resources/
+Disallow: /node_modules/
+Disallow: /tests/
+Disallow: /config/
+Disallow: /database/
+Disallow: /bootstrap/
+Disallow: /routes/
+Disallow: /artisan
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /yarn.lock
+Disallow: /phpunit.xml
+Disallow: /public/storage/
+
+# Allow search engines to index the main public pages
+Allow: /
+Allow: /welcome
+Allow: /pricing
+Allow: /contact
+Allow: /features
+Allow: /faq
+
+# Prevent indexing of any URLs that include query parameters (e.g., ?page=2)
+Disallow: /*?
+
+# Specify the location of the XML sitemap (replace with the actual URL of your sitemap)
+Sitemap: https://laravel.techno-saas.com/sitemap.xml
