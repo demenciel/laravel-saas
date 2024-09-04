@@ -19,25 +19,25 @@ welcome:
 
 setup:
 	@echo "${BLUE}Step 1: Setting up configuration${NC}"
-	@bash setup_config.sh
+	@bash scripts/setup_config.sh
 	@echo ""
 
 create_repo:
 	@echo "${BLUE}Step 2: Creating GitHub repository and Cloudflare CNAME${NC}"
 	@read -p "Enter the domain name for your project: " domain; \
-	bash create_repo.sh $$domain
+	bash scripts/create_repo.sh $$domain
 	@echo ""
 
 create_ssl:
 	@echo "${BLUE}Step 3: Creating SSL certificate${NC}"
 	@read -p "Enter the domain name for SSL certificate: " domain; \
-	sudo bash create_ssl.sh $$domain
+	sudo bash scripts/create_ssl.sh $$domain
 	@echo ""
 
 create_nginx:
 	@echo "${BLUE}Step 4: Creating Nginx configuration${NC}"
 	@read -p "Enter the domain name for Nginx configuration: " domain; \
-	sudo bash create_nginx_conf.sh $$domain
+	sudo bash scripts/create_nginx_conf.sh $$domain
 	@echo ""
 
 check_dependencies:
