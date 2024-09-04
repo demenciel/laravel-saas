@@ -1,4 +1,40 @@
+import { createTheme } from '@mui/material';
 import { createContext, useContext, useEffect, useState } from 'react';
+
+// Define your Tailwind colors
+const tailwindColors = {
+    light: {
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        background: 'hsl(var(--background))',
+        text: 'hsl(var(--foreground))',
+    },
+    dark: {
+        primary: 'hsl(var(--primary))',
+        secondary: 'hsl(var(--secondary))',
+        background: 'hsl(var(--background))',
+        text: 'hsl(var(--foreground))',
+    },
+};
+
+// Create MUI theme with Tailwind colors
+const getMuiTheme = (mode: 'light' | 'dark') => createTheme({
+    palette: {
+        mode,
+        primary: {
+            main: tailwindColors[mode].primary,
+        },
+        secondary: {
+            main: tailwindColors[mode].secondary,
+        },
+        background: {
+            default: tailwindColors[mode].background,
+        },
+        text: {
+            primary: tailwindColors[mode].text,
+        },
+    },
+});
 
 interface ThemeContextType {
     theme: 'light' | 'dark';
@@ -34,5 +70,5 @@ export const useThemeProvider = () => {
         setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
     };
 
-    return { theme, toggleTheme };
+    return { theme, toggleTheme, getMuiTheme };
 };

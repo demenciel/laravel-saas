@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'facebook_id',
         'status',
+        'role_id',
+        'phone',
+        'address',
+        'profile_photo_id',
     ];
 
     /**
@@ -46,5 +50,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function profilePhoto()
+    {
+        return $this->belongsTo(Photo::class);
     }
 }

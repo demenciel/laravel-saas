@@ -3,6 +3,15 @@ export interface User {
     name: string;
     email: string;
     email_verified_at?: string;
+    role?: {
+        id: number;
+        name: string;
+    };
+    status?: string;
+    phone?: string;
+    address?: string;
+    profile_photo_id?: number;
+    profile_photo_path?: string;
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
