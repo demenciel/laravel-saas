@@ -31,7 +31,7 @@ const features = [
         title: "SEO Optimized",
         description: "Enhance your app's search engine visibility with our built-in SEO features. From optimized meta tags to clean HTML, our boilerplate is designed to help your application perform well online.",
         icon: <FaSearch className="w-8 h-8 text-primary" />
-    },
+    }
 ];
 
 const Features = () => {
