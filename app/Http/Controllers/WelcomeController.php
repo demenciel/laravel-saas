@@ -20,7 +20,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $products = $this->welcomeService->getProducts('one_time');
-        return Inertia::render('Welcome', [
+        return Inertia::render('Welcome/WelcomeIndex', [
             'appUrl' =>  env('APP_URL'),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),

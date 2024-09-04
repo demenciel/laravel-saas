@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\User;
 use App\Services\GoogleService;
 use Laravel\Socialite\Facades\Socialite;
@@ -36,7 +37,19 @@ class GoogleController extends Controller
         }
         $user = User::where('email', $googleUser->email)->first();
         if (!$user) {
-            $user = User::create(['name' => $googleUser->name, 'email' => $googleUser->email, 'password' => Hash::make(rand(100000, 999999))]);
+            $user = User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'password' => Hash::make(rand(100000, 999999)),
+                'role_id' => 2,
+                'address' => 'No address',
+                'phone' => 'No phone',
+                'profile_photo_path' => '/images/default-avatar.webp',
+            ]);
+            Photo::create([
+                'user_id' => $user->id,
+                'path' => '/images/default-avatar.webp',
+            ]);
         }
         auth()->login($user, true);
         return redirect()->route('dashboard');

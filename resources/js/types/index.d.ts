@@ -10,7 +10,10 @@ export interface User {
     status?: string;
     phone?: string;
     address?: string;
-    profile_photo_id?: number;
+    photo?: {
+        id: number;
+        path: string;
+    };
     profile_photo_path?: string;
 }
 

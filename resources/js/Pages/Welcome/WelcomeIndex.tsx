@@ -7,7 +7,7 @@ import Hero from '@/Components/Hero';
 import Features from '@/Components/Features';
 import PriceCards from '@/Components/PriceCards';
 
-export default function Welcome({ auth }: PageProps) {
+export default function WelcomeIndex({ auth }: PageProps) {
     const { products, csrf, appUrl } = usePage().props as unknown as {
         products: { data: any[] },
         csrf: string,
@@ -28,7 +28,7 @@ export default function Welcome({ auth }: PageProps) {
                 <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
-            <div className="text-gray-800 dark:bg-black/90 dark:text-white/50 overflow-hidden">
+            <div className="text-gray-800 relative dark:bg-black/90 dark:text-white/50 overflow-hidden">
                 <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="/hero-blur.png" />
                 <div className="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">

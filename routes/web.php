@@ -36,7 +36,9 @@ use Illuminate\Support\Facades\Mail;
     WELCOME ROUTES
 ------------------------------ */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::name('welcome.')->group(function () {
+    Route::get('/', [WelcomeController::class, 'index'])->name('index');
+});
 
 /* ------------------------------
     SOCIAL ROUTES

@@ -12,9 +12,9 @@ echo -e "${BLUE}    Nginx Configuration Creation Tool    ${NC}"
 echo -e "${BLUE}=========================================${NC}"
 
 echo -e "${YELLOW}Note: This script assumes:${NC}"
-echo -e "${YELLOW}- You're using PHP 8.2 (adjust the PHP-FPM socket path if using a different version)${NC}"
+echo -e "${YELLOW}- You're using PHP 8.3 (adjust the PHP-FPM socket path if using a different version)${NC}"
 echo -e "${YELLOW}- The TechnoSaas project is located at /var/www/<domain>/public${NC}"
-echo -e "${YELLOW}- SSL certificates have been created using Let's Encrypt and Certbot${NC}"
+echo -e "${YELLOW}- SSL certificates have been created using the create_ssl.sh script${NC}"
 echo -e "${YELLOW}- You're running this script with sudo privileges${NC}"
 echo -e "${BLUE}=========================================${NC}"
 

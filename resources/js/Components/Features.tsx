@@ -3,34 +3,64 @@ import { FaDesktop, FaKey, FaLaravel, FaSearch, FaStripe, FaDatabase, FaTools } 
 
 const features = [
     {
-        title: "Laravel",
+        title: "Laravel: The PHP Framework for Web Development",
         description: "Built on Laravel, a popular PHP framework, our boilerplate provides a solid foundation for your web application development, ensuring a smooth and efficient workflow.",
-        icon: <FaLaravel className="w-8 h-8 text-primary" />
+        icon: <FaLaravel className="w-8 h-8 text-primary" />,
+        features: [
+            "Fast and secure backend development using modern PHP practices.",
+            "Built-in support for routing, middleware, and controllers.",
+            "Streamline database management with Eloquent ORM."
+        ]
     },
     {
-        title: "Automated Setup Scripts",
+        title: "Automated Setup Scripts: Get Started in Minutes",
         description: "Simplify your development process with our automated setup scripts for project configuration, SSL certificate creation, and Nginx configuration. Get your project up and running in minutes.",
-        icon: <FaTools className="w-8 h-8 text-primary" />
+        icon: <FaTools className="w-8 h-8 text-primary" />,
+        features: [
+            "Automated SSL certificate generation with Let’s Encrypt.",
+            "Pre-configured Nginx for optimal performance and security.",
+            "Reduce initial setup time with ready-to-use environment configuration."
+        ]
     },
     {
-        title: "Stripe Integration",
+        title: "Simplified Payment Integration with Stripe",
         description: "Easily manage payments with our Stripe integration, supporting one-time payments and subscriptions. No more wasting time setting up Stripe logic.",
-        icon: <FaStripe className="w-12 h-12 text-primary" />
+        icon: <FaStripe className="w-12 h-12 text-primary" />,
+        features: [
+            "Support for both one-time payments and recurring subscriptions.",
+            "Pre-built webhook handling for seamless Stripe integration.",
+            "Detailed payment analytics and reporting."
+        ]
     },
     {
-        title: "Laravel Breeze & Socialite",
+        title: "Laravel Breeze & Socialite: Secure and Reliable User Sign-ups",
         description: "Manage user authentication with Laravel Breeze, including support for Google, Facebook, and email logins. Our setup makes it easy to get started with secure and reliable user sign-ups.",
-        icon: <FaKey className="w-8 h-8 text-primary" />
+        icon: <FaKey className="w-8 h-8 text-primary" />,
+        features: [
+            "Out-of-the-box social login with Google, Facebook, and more.",
+            "Secure user registration and login with email verification.",
+            "Fully customizable authentication flows for your SaaS app."
+        ]
     },
     {
-        title: "Responsive Design",
+        title: "Responsive Design: Ensure Your App Looks Great on All Devices",
         description: "Ensure your app looks great on all devices with our fully responsive design. The layout adapts seamlessly to different screen sizes, providing a consistent user experience.",
-        icon: <FaDesktop className="w-8 h-8 text-primary" />
+        icon: <FaDesktop className="w-8 h-8 text-primary" />,
+        features: [
+            "Responsive design optimized for desktop, tablet, and mobile.",
+            "Pixel-perfect rendering across a variety of devices and screen sizes.",
+            "Fluid layouts that adapt seamlessly to any screen resolution."
+        ]
     },
     {
-        title: "SEO Optimized",
+        title: "SEO Optimized: Enhance Your App's Search Engine Visibility",
         description: "Enhance your app's search engine visibility with our built-in SEO features. From optimized meta tags to clean HTML, our boilerplate is designed to help your application perform well online.",
-        icon: <FaSearch className="w-8 h-8 text-primary" />
+        icon: <FaSearch className="w-8 h-8 text-primary" />,
+        features: [
+            "Optimized meta tags and headers for better search engine ranking.",
+            "Clean HTML structure to improve crawling and indexing.",
+            "Built-in sitemap generation and structured data markup for SEO."
+        ]
     }
 ];
 

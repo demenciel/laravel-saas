@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\User;
 use App\Services\FacebookService;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +43,16 @@ class FacebookController extends Controller
             $existingUser = User::create([
                 'facebook_id' => $user->getId(),
                 'name' => $user->getName(),
+                'role_id' => 2,
+                'address' => 'No address',
+                'phone' => 'No phone',
                 'email' => $user->getEmail(),
-                'password' => Hash::make($user->getName() . '@' . $user->getId())
+                'password' => Hash::make($user->getName() . '@' . $user->getId()),
+                'profile_photo_path' => '/images/default-avatar.webp',
+            ]);
+            Photo::create([
+                'user_id' => $existingUser->id,
+                'path' => '/images/default-avatar.webp',
             ]);
         } else {
             $existingUser->facebook_id = $user->getId();

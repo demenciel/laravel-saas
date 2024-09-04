@@ -26,7 +26,6 @@ class User extends Authenticatable
         'role_id',
         'phone',
         'address',
-        'profile_photo_id',
     ];
 
     /**
@@ -57,8 +56,16 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function profilePhoto()
+    // Photo model has user_id field
+    public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->hasOne(Photo::class);
+    }
+
+    protected $appends = ['profile_photo_path'];
+
+    public function getProfilePhotoPathAttribute()
+    {
+        return $this->photo ? $this->photo->path : '/images/default-avatar.webp';
     }
 }

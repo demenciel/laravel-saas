@@ -1,5 +1,6 @@
 import React from "react";
-
+// import check icon frm mui
+import CheckIcon from '@mui/icons-material/Check';
 interface Product {
     id: string;
     name: string;
@@ -13,6 +14,9 @@ interface Product {
         };
         unit_amount: number;
     }>;
+    marketing_features: Array<{
+        name: string;
+    }>;
     url?: string | null;
     features: string[];
 }
@@ -24,6 +28,7 @@ const PriceCard = ({
     product: Product;
     setData: (data: any) => void;
 }) => {
+    console.log(product);
     return (
         <div className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300">
             <div className="p-6">
@@ -49,7 +54,18 @@ const PriceCard = ({
                             </span>
                         )}
                     </div>
+
+
                 )}
+            </div>
+            <div className="flex flex-col gap-2 p-6 mb-4 border-t border-gray-200 dark:border-gray-700">
+
+                {product.marketing_features.length > 0 && product.marketing_features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                        <CheckIcon className="w-4 h-4 text-green-500" />
+                        <span className="text-gray-800 dark:text-white">{feature.name}</span>
+                    </div>
+                ))}
             </div>
             <button
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
