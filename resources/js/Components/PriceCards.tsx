@@ -74,7 +74,7 @@ export default function PriceCards({ products = [], csrf }: SubscriptionCardProp
                         Build Your Next Project Faster with Pre-Configured Integrations and Tools.
                     </h6>
 
-                    <div className={`grid gap-8 items-center ${products.length === 2 ? 'sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+                    <div className={`grid gap-4 items-center ${products.length === 2 ? 'sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
                         {products.map((product, index) => (
                             <motion.div
                                 key={product.id}
