@@ -99,7 +99,7 @@ class PaymentsController extends Controller
             ]);
         }
         $downloadLink->update(['downloaded' => true]);
-        $filePath = storage_path('app/technosaas.zip');
-        return response()->download($filePath, 'technosaas.zip');
+        $filePath = storage_path('app/v1.zip');
+        return response()->download($filePath, 'v1.zip');
     }
 }
