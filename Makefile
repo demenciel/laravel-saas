@@ -5,17 +5,40 @@ YELLOW := \033[1;33m
 BLUE := \033[0;34m
 NC := \033[0m
 
-.PHONY: all welcome setup create_repo create_ssl create_nginx help
+.PHONY: all welcome setup create_repo create_ssl create_nginx help menu
 
-all: check_dependencies welcome setup create_repo create_ssl create_nginx
+all: welcome check_dependencies select_option
 
 welcome:
-	@echo "${BLUE}=========================================${NC}"
-	@echo "${BLUE}   Welcome to TechnoSaas Boilerplate!    ${NC}"
-	@echo "${BLUE}=========================================${NC}"
+	@echo "${BLUE}#########################################${NC}"
+	@echo "${BLUE}##                                     ##${NC}"
+	@echo "${BLUE}##   Welcome to TechnoSaas Boilerplate! ##${NC}"
+	@echo "${BLUE}##                                     ##${NC}"
+	@echo "${BLUE}#########################################${NC}"
+	@echo ""
 	@echo "${YELLOW}This Makefile will guide you through the setup process.${NC}"
 	@echo "${YELLOW}Please follow the prompts to configure your environment.${NC}"
 	@echo ""
+	@bash -c 'read -p "Press [Enter] to continue..."'
+
+select_option:
+	@echo "${YELLOW}Choose the setup process you would like to run:${NC}"
+	@echo "1) Setup configuration"
+	@echo "2) Create GitHub repository"
+	@echo "3) Create Cloudflare CNAME record"
+	@echo "4) Create SSL certificate"
+	@echo "5) Create Nginx configuration"
+	@echo "6) Run all steps"
+	@bash -c 'read -p "Enter your choice: "' choice; \
+	case $$choice in \
+		1) make setup ;; \
+		2) make create_repo ;; \
+		3) make create_cloudflare ;; \
+		4) make create_ssl ;; \
+		5) make create_nginx ;; \
+		6) make all_steps ;; \
+		*) echo "${RED}Invalid choice!${NC}" && make select_option ;; \
+	esac
 
 setup:
 	@echo "${BLUE}Step 1: Setting up configuration${NC}"
@@ -23,22 +46,36 @@ setup:
 	@echo ""
 
 create_repo:
-	@echo "${BLUE}Step 2: Creating GitHub repository and Cloudflare CNAME${NC}"
-	@read -p "Enter the domain name for your project: " domain; \
-	bash scripts/create_repo.sh $$domain
+	@echo "${BLUE}Step 2: Creating GitHub repository${NC}"
+	@bash -c 'read -p "Enter the domain name for your project: "' domain; \
+	@bash scripts/create_repo.sh $$domain
+	@echo ""
+
+create_cloudflare:
+	@echo "${BLUE}Step 3: Creating Cloudflare CNAME record${NC}"
+	@bash -c 'read -p "Enter the domain name for Cloudflare: "' domain; \
+	@bash scripts/create_cloudflare.sh $$domain
 	@echo ""
 
 create_ssl:
-	@echo "${BLUE}Step 3: Creating SSL certificate${NC}"
-	@read -p "Enter the domain name for SSL certificate: " domain; \
-	sudo bash scripts/create_ssl.sh $$domain
+	@echo "${BLUE}Step 4: Creating SSL certificate${NC}"
+	@bash -c 'read -p "Enter the domain name for SSL certificate: "' domain; \
+	@bash scripts/create_ssl.sh $$domain
 	@echo ""
 
 create_nginx:
-	@echo "${BLUE}Step 4: Creating Nginx configuration${NC}"
-	@read -p "Enter the domain name for Nginx configuration: " domain; \
-	sudo bash scripts/create_nginx_conf.sh $$domain
+	@echo "${BLUE}Step 5: Creating Nginx configuration${NC}"
+	@bash -c read -p '"Enter the domain name for Nginx configuration: "' domain; \
+	@bash scripts/create_nginx_conf.sh $$domain
 	@echo ""
+
+all_steps:
+	@echo "${GREEN}Running all steps...${NC}"
+	@make setup
+	@make create_repo
+	@make create_cloudflare
+	@make create_ssl
+	@make create_nginx
 
 check_dependencies:
 	@echo "${BLUE}Step 0: Checking and installing dependencies${NC}"
