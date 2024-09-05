@@ -29,20 +29,36 @@ source /var/www/html/config.sh
 
 # Check GitHub credentials
 if [ -z "$GIT_UID" ] || [ -z "$GIT_TOK" ]; then
-    echo "ERROR: GitHub configuration is incomplete. Please run setup_config.sh to set up your GitHub credentials."
+    echo -e "${RED}ERROR: GitHub configuration is incomplete. Please run setup_config.sh to set up your GitHub credentials.${NC}"
     exit 1
 fi
 
-echo "Sending request to GitHub API..."
+echo -e "${YELLOW}Checking if the repository already exists in the user account on GitHub...${NC}"
+sleep 1
+# Check if the repository already exists in the user's account
+response=$(curl -s -X GET \
+    "https://api.github.com/repos/$GIT_UID/$site" \
+    -H "Accept: application/vnd.github.v3+json" \
+    -H "Authorization: token $GIT_TOK")
+
+echo "$response"
+if echo "$response" | !grep -q "\"message\":\"Not Found\""; then
+    echo -e "${RED}ERROR: Repository '$site' already exists in the user account '$GIT_UID'. Exiting...${NC}"
+    exit 1
+fi
+
+echo -e "${YELLOW}==========================================================${NC}"
+echo -e "${YELLOW} Creating the '$site' repository on GitHub${NC}"
+echo -e "${YELLOW}==========================================================${NC}"
+sleep 2
+# If GIT_ORG is set, create repository in the organization; else create it for the user
 if [ -z "$GIT_ORG" ]; then
-    # If GIT_ORG is not set, create repository for the user
     response=$(curl -s -X POST \
         "https://api.github.com/user/repos" \
         -H "Accept: application/vnd.github.v3+json" \
         -H "Authorization: token $GIT_TOK" \
         -d "{\"name\":\"$site\",\"private\":true,\"auto_init\":false}")
 else
-    # If GIT_ORG is set, create repository in the organization
     response=$(curl -s -X POST \
         "https://api.github.com/orgs/$GIT_ORG/repos" \
         -H "Accept: application/vnd.github.v3+json" \
@@ -50,62 +66,55 @@ else
         -d "{\"name\":\"$site\",\"private\":true,\"auto_init\":false}")
 fi
 
-echo "GitHub API Response:"
-echo "$response"
-echo ""
-
 if echo "$response" | grep -q "\"errors\""; then
-    echo "ERROR: Failed to create the repository. Please check the API response above for details."
+    echo -e "${RED}ERROR: Failed to create the repository. Please check the API response above for details.${NC}"
     exit 1
 else
     if [ -z "$GIT_ORG" ]; then
-        echo "SUCCESS: Repository '$site' created successfully for user $GIT_UID."
-    else
-        echo "SUCCESS: Repository '$site' created successfully in the '$GIT_ORG' organization."
-    fi
-fi
-
-echo -e "${YELLOW}GitHub API Response:${NC}"
-echo "$response"
-
-# Init Repo 
-if echo "$response" | grep -q "\"errors\""; then
-    echo "ERROR: Failed to create the repository. Please check the API response above for details."
-    exit 1
-else
-    if [ -z "$GIT_ORG" ]; then
-        echo "SUCCESS: Repository '$site' created successfully for user $GIT_UID."
+        echo -e "${GREEN}SUCCESS: Repository '$site' created successfully for user $GIT_UID.${NC}"
         repo_url="https://github.com/$GIT_UID/$site.git"
     else
-        echo "SUCCESS: Repository '$site' created successfully in the '$GIT_ORG' organization."
+        echo -e "${GREEN}SUCCESS: Repository '$site' created successfully in the '$GIT_ORG' organization.${NC}"
         repo_url="https://github.com/$GIT_ORG/$site.git"
     fi
+fi
+sleep 2
+# Init Repo 
+if [ -d ".git" ]; then
+    echo -e "${YELLOW}Existing Git repository found. Removing...${NC}"
+    sudo rm -rf .git
+    echo -e "${GREEN}Existing Git repository removed.${NC}"
+fi
 
-    # Initialize local repository
-    cd ..
-    echo "Initializing local Git repository..."
-    git init
-
+# Initialize local repository
+cd ..
+echo -e "${YELLOW}Initializing local Git repository...${NC}"
+git init -b main
+sleep 2
+# Check if there are any files to commit
+if [ -n "$(git status --porcelain)" ]; then
     # Add all files in the current directory
-    echo "Adding files to the repository..."
+    echo -e "${YELLOW}Adding files to the repository...${NC}"
     git add .
 
     # Commit the files
-    echo "Committing files..."
+    echo -e "${YELLOW}Committing files...${NC}"
     git commit -m "Initial commit"
-
-    # Add the remote
-    echo "Adding remote repository..."
-    git remote add origin $repo_url
-
-    # Push to the remote repository
-    echo "Pushing to remote repository..."
-    git push -u origin main
-
-    if [ $? -eq 0 ]; then
-        echo "SUCCESS: Local repository initialized and pushed to GitHub."
-    else
-        echo "ERROR: Failed to push to the remote repository. Please check your credentials and try again."
-        exit 1
-    fi
+else
+    echo -e "${YELLOW}No changes to commit. Skipping commit step.${NC}"
 fi
+sleep 2
+# Add the remote repository
+echo -e "${YELLOW}Adding remote repository...${NC}"
+sleep 1
+git remote add origin $repo_url
+sleep 1
+# Push to the remote repository
+echo -e "${YELLOW}Pushing to remote repository...${NC}"
+if ! git push --set-upstream origin master; then
+    echo -e "${RED}ERROR: Failed to push to the remote repository. Please check your credentials and try again.${NC}"
+    exit 1
+fi
+sleep 1
+echo -e "${GREEN}SUCCESS: Repository '$site' pushed to remote repository.${NC}"
+sleep 3

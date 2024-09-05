@@ -25,6 +25,18 @@ read -p "Enter your Cloudflare account email: " CF_EMAIL
 
 # Save configuration to file
 echo -e "${YELLOW}Saving configuration to /var/www/html/config.sh...${NC}"
+# Check if the config file already exists
+if [ -f "/var/www/html/config.sh" ]; then
+    echo -e "${YELLOW}Config file already exists. Overwriting...${NC}"
+fi
+
+# Set appropriate permissions for the config file
+touch /var/www/html/config.sh
+chmod 644 /var/www/html/config.sh
+
+# Ensure the directory has the correct permissions
+chmod 755 /var/www/html
+
 cat > /var/www/html/config.sh << EOF
 export GIT_UID="$GIT_UID"
 export GIT_TOK="$GIT_TOK"
