@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\DownloadLinkEmail;
 use App\Models\DownloadLink;
 use App\Services\PaymentsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
-use Stripe\Checkout\Session;
+
 
 class PaymentsController extends Controller
 {
@@ -20,6 +18,11 @@ class PaymentsController extends Controller
         $this->paymentsService = $paymentsService;
     }
 
+    /* 
+        Redirect to the subscription checkout page
+        @param Request $request
+        @return \Illuminate\Http\RedirectResponse
+    */
     public function redirectToSubscriptionCheckout(Request $request)
     {
         $checkout_session = $this->paymentsService->redirectToCheckout(
@@ -31,6 +34,11 @@ class PaymentsController extends Controller
         return redirect($checkout_session->url);
     }
 
+    /* 
+        Redirect to the one-time checkout page
+        @param Request $request
+        @return \Illuminate\Http\RedirectResponse
+    */
     public function redirectToOneTimeCheckout(Request $request)
     {
         $checkout_session = $this->paymentsService->redirectToCheckout(
@@ -42,37 +50,19 @@ class PaymentsController extends Controller
         return redirect($checkout_session->url);
     }
 
+    /* 
+        Handle the payment success page
+        @param Request $request
+        @return \Inertia\Response
+    */
     public function paymentSuccess(Request $request)
     {
         try {
             $session_id = $request->input('session_id');
-            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-            // Retrieve the session and expand line_items
-            $session = \Stripe\Checkout\Session::retrieve([
-                'id' => $session_id,
-                'expand' => ['line_items.data.price.product'],
-            ]);
-
+            $session = $this->paymentsService->getSession($session_id);
             $downloadLink = DownloadLink::where('session_id', $session_id)->first();
-
             if ($session->payment_status == 'paid' && !$downloadLink) {
-                // Get product id from session line items
-                $lineItem = $session->line_items->data[0];
-
-                // Get the product directly from the expanded line item
-                $product = $lineItem->price->product;
-
-                // Map the product ID to the correct file
-                $productFile = $this->mapProductIdToProductFile($product->id);
-                DownloadLink::create([
-                    'email' => $session->customer_details->email,
-                    'session_id' => $session_id,
-                    'downloaded' => false,
-                    'sent_at' => now(),
-                    'product' => $productFile,
-                ]);
-
+                $this->paymentsService->createDownloadLink($session, $session_id);
                 // Send the download link
                 $this->paymentsService->sendDownloadLink($session->customer_details->email, $session_id);
 
@@ -94,21 +84,11 @@ class PaymentsController extends Controller
         }
     }
 
-    protected function mapProductIdToProductFile($productId)
-    {
-        // Example logic for mapping price ID to product file
-        $mapping = [
-            env('STRIPE_PRODUCT_ID_ONE') => 'v1.zip',
-            env('STRIPE_PRODUCT_ID_TWO') => 'v2.zip',
-        ];
-        if (isset($mapping[$productId])) {
-            return $mapping[$productId];
-        } else {
-            throw new \Exception('Product file not found for product ID: ' . $productId);
-        }
-    }
-
-
+    /* 
+        Handle the payment subscription success page
+        @param Request $request
+        @return \Inertia\Response
+    */
     public function paymentSubscriptionSuccess()
     {
         return Inertia::render('Payments/Success', [
@@ -117,6 +97,11 @@ class PaymentsController extends Controller
         ]);
     }
 
+    /* 
+        Handle the payment cancel page
+        @param Request $request
+        @return \Inertia\Response
+    */
     public function paymentCancel()
     {
         return Inertia::render('Payments/Cancel', [
@@ -125,29 +110,22 @@ class PaymentsController extends Controller
         ]);
     }
 
+    /* 
+        Handle the download boilerplate page
+        @param Request $request
+        @return \Inertia\Response
+    */
     public function downloadBoilerplate(Request $request)
     {
         $session_id = $request->input('session_id');
         $downloadLink = DownloadLink::where('session_id', $session_id)->first();
-
         if (!$downloadLink || $downloadLink->downloaded) {
-            // Either the session ID is invalid or the file has already been downloaded
             return Inertia::render('Payments/Success', [
                 'message' => 'The file has already been downloaded or the link is invalid.',
                 'appUrl' => env('APP_URL'),
             ]);
         }
-
-        info('DOWNLAOD PRODUCT: ' . $downloadLink->product);
-        $filePath = storage_path('app/' . $downloadLink->product);
-        if (!file_exists($filePath)) {
-            Log::error('File not found: ' . $filePath);
-            return Inertia::render('Payments/Success', [
-                'message' => 'The file you requested is not available. Please contact support.',
-                'appUrl' => env('APP_URL'),
-            ]);
-        }
-        $downloadLink->update(['downloaded' => true]);
+        $filePath = $this->paymentsService->createFilePath($downloadLink);
         return response()->download($filePath);
     }
 }

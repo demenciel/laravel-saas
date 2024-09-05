@@ -88,7 +88,7 @@ export default function PriceCards({ products = [], csrf }: SubscriptionCardProp
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
                                 whileHover={{ scale: 1.05 }}
-                                className={`max-w-[320px] ${index === 1 ? "scale-110" : ""} ${products.length === 2 ? 'mx-auto' : ''}`}
+                                className={`max-w-[380px] ${index === 1 ? "scale-110" : ""} ${products.length === 2 ? 'mx-auto' : ''}`}
                             >
                                 <PriceCard products={products} product={product} setData={setData} />
                             </motion.div>
