@@ -74,7 +74,7 @@ export default function PriceCards({ products = [], csrf }: SubscriptionCardProp
                         Build Your Next Project Faster with Pre-Configured Integrations and Tools.
                     </h6>
 
-                    <div className={`grid gap-8 justify-center ${products.length === 1 ? 'justify-center' : products.length === 2 ? 'sm:grid-cols-1 md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+                    <div className={`grid gap-8 items-center ${products.length === 2 ? 'sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
                         {products.map((product, index) => (
                             <motion.div
                                 key={product.id}
@@ -88,9 +88,9 @@ export default function PriceCards({ products = [], csrf }: SubscriptionCardProp
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
                                 whileHover={{ scale: 1.05 }}
-                                className={`max-w-[320px] ${index === 1 ? "scale-110" : ""}`}
+                                className={`max-w-[320px] ${index === 1 ? "scale-110" : ""} ${products.length === 2 ? 'mx-auto' : ''}`}
                             >
-                                <PriceCard product={product} setData={setData} />
+                                <PriceCard products={products} product={product} setData={setData} />
                             </motion.div>
                         ))}
                     </div>
