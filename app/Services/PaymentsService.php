@@ -89,5 +89,6 @@ class PaymentsService
             ]);
         }
         $downloadLink->update(['downloaded' => true]);
+        return $filePath;
     }
 }
