@@ -6,6 +6,7 @@ use App\Services\WelcomeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class WelcomeController extends Controller
 {
@@ -17,10 +18,10 @@ class WelcomeController extends Controller
         $this->welcomeService = $welcomeService;
     }
 
-    public function index()
+    public function index(): Response
     {
         $products = $this->welcomeService->getProducts('one_time');
-        return Inertia::render('Welcome/WelcomeIndex', [
+        return Inertia::render('Welcome/Index', [
             'appUrl' =>  env('APP_URL'),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),

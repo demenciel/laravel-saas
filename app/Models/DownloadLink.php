@@ -14,5 +14,6 @@ class DownloadLink extends Model
         'session_id',
         'downloaded',
         'sent_at',
+        'product',
     ];
 }

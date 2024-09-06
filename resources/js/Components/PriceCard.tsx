@@ -1,6 +1,6 @@
 import React from "react";
-// import check icon frm mui
-import CheckIcon from '@mui/icons-material/Check';
+import { Box, Typography, Button, Divider, Paper, Grid } from "@mui/material";
+import { CheckCircleTwoTone } from "@mui/icons-material";
 interface Product {
     id: string;
     name: string;
@@ -14,66 +14,100 @@ interface Product {
         };
         unit_amount: number;
     }>;
-    marketing_features: Array<{
+    features: {
         name: string;
-    }>;
+    }[];
     url?: string | null;
-    features: string[];
 }
 
 const PriceCard = ({
     product,
+    products,
     setData,
 }: {
     product: Product;
+    products: Product[];
     setData: (data: any) => void;
 }) => {
-    console.log(product);
+    const isHighestPriced = () => {
+        if (!product.prices || product.prices.length === 0) return false;
+        const currentPrice = product.prices[0].unit_amount;
+        return products.every(p => !p.prices || p.prices.length === 0 || p.prices[0].unit_amount <= currentPrice);
+    };
+
+
+    const textFeatureStyle = isHighestPriced()
+        ? "text-gray-800 dark:text-white"
+        : "text-gray-600 dark:text-gray-300";
+
+    const buttonStyle = isHighestPriced()
+        ? "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md"
+        : "w-full bg-transparent hover:bg-blue-600 text-blue-600 hover:text-white font-bold py-2 px-4 rounded-lg border border-blue-600 transition duration-300";
+
+    const paperStyle = isHighestPriced()
+        ? "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full border border-primary drop-shadow-lg"
+        : "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full"
+
     return (
-        <div className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300">
-            <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
+        <Paper
+            elevation={1}
+            sx={{
+                borderRadius: "20px",
+            }}
+            className={paperStyle}>
+            <Box className="p-6">
+                <Typography
+                    fontWeight={isHighestPriced() ? "bold" : "normal"}
+                    variant="h5" className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
                     {product.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {product.description || "No description available"}
-                </p>
-            </div>
-            <div className="p-6 py-6 border-t border-gray-200 dark:border-gray-700">
-                {product.prices && product.prices.length > 0 && (
-                    <div className="my-6 text-center">
-                        <span className="text-4xl font-bold text-gray-900 dark:text-white">
-                            ${product.prices[0].unit_amount / 100}
-                        </span>
-                        <span className="text-xl font-medium text-gray-600 dark:text-gray-300">
-                            {product.prices[0].currency.toUpperCase()} {product.prices[0].recurring && `/${product.prices[0].recurring.interval}ly`}
-                        </span>
-                        {!product.prices[0].recurring && (
-                            <span className="text-sm text-gray-500 dark:text-gray-400 block">
-                                One-time purchase
-                            </span>
-                        )}
-                    </div>
-
-
-                )}
-            </div>
-            <div className="flex flex-col gap-2 p-6 mb-4 border-t border-gray-200 dark:border-gray-700">
-
-                {product.marketing_features.length > 0 && product.marketing_features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                        <CheckIcon className="w-4 h-4 text-green-500" />
-                        <span className="text-gray-800 dark:text-white">{feature.name}</span>
-                    </div>
+                </Typography>
+            </Box>
+            <Divider className="border-gray-200 dark:border-gray-700" />
+            <Box className="p-2 py-6 flex-grow">
+                {product?.features && product?.features.map((feature, index) => (
+                    <Box key={index} className="py-2">
+                        <Grid container spacing={2} alignItems="center">
+                            <Grid item xs={1} className="flex justify-center items-center">
+                                <CheckCircleTwoTone className="text-primary mr-2 inline-block" />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <Typography variant="body1"
+                                    fontWeight={isHighestPriced() ? "bold" : "normal"}
+                                    className={textFeatureStyle}>
+                                    {feature.name}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </Box>
                 ))}
-            </div>
+            </Box>
+            <Divider className="border-gray-200 dark:border-gray-700" />
+            <Box className="p-6 py-6">
+                {product.prices && product.prices.length > 0 && (
+                    <Box className="my-6 text-center">
+                        <Typography variant="h4" component="span"
+                            fontWeight={isHighestPriced() ? "bold" : "normal"}
+                            className="text-4xl font-bold text-gray-900 dark:text-white">
+                            ${product.prices[0].unit_amount / 100}
+                        </Typography>
+                        <Typography variant="h6" component="span" className="text-xl font-medium text-gray-600 dark:text-gray-300">
+                            {product.prices[0].currency.toUpperCase()} {product.prices[0].recurring && `/${product.prices[0].recurring.interval}ly`}
+                        </Typography>
+                        {!product.prices[0].recurring && (
+                            <Typography variant="body2" className="text-sm text-gray-500 dark:text-gray-400 block">
+                                Pay once, use forever
+                            </Typography>
+                        )}
+                    </Box>
+                )}
+            </Box>
             <button
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+                className={buttonStyle}
                 onClick={() => setData({ product: product })}
             >
-                Purchase Now
+                Start Building
             </button>
-        </div>
+        </Paper>
     );
 };
 

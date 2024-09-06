@@ -4,12 +4,13 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
 
 
 class WelcomeService
 {
 
-    public function getProducts($type)
+    public function getProducts(): \Stripe\Collection
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $products = \Stripe\Product::all([

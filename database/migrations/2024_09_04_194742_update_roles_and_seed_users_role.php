@@ -12,10 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::table('roles')->where('id', 3)->update(['name' => 'developer']);
-        DB::table('roles')->where('id', 4)->update(['name' => 'seeder']);
-
-        DB::table('users')->update(['role_id' => 4]);
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+        // create 4 roles
+        DB::table('roles')->insert([
+            ['name' => 'admin'],
+            ['name' => 'user'],
+            ['name' => 'developer'],
+            ['name' => 'seeder'],
+        ]);
     }
 
     /**
@@ -23,9 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('roles')->where('id', 3)->update(['name' => 'developer']);
-        DB::table('roles')->where('id', 4)->update(['name' => 'seeder']);
-
-        DB::table('users')->update(['role_id' => 4]);
+        Schema::table('roles', function (Blueprint $table) {
+            $table->string('name')->change();
+        });
     }
 };
