@@ -38,17 +38,22 @@ const PriceCard = ({
     };
 
 
+    const textFeatureStyle = isHighestPriced()
+        ? "text-gray-800 dark:text-white"
+        : "text-gray-600 dark:text-gray-300";
 
     const buttonStyle = isHighestPriced()
         ? "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
         : "w-full bg-transparent hover:bg-blue-600 text-blue-600 hover:text-white font-bold py-2 px-4 rounded-lg border border-blue-600 transition duration-300";
 
+    const paperStyle = isHighestPriced() ? "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full border border-primary" : "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full"
+
     return (
-        <Paper className="p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full">
+        <Paper className={paperStyle}>
             <Box className="p-6">
                 <Typography
                     fontWeight={isHighestPriced() ? "bold" : "normal"}
-                    variant={isHighestPriced() ? "h4" : "h5"} className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
+                    variant="h5" className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
                     {product.name}
                 </Typography>
             </Box>
@@ -57,11 +62,13 @@ const PriceCard = ({
                 {product?.features && product?.features.map((feature, index) => (
                     <Box key={index} className="py-2">
                         <Grid container spacing={2} alignItems="center">
-                            <Grid item xs={1} >
+                            <Grid item xs={1} className="flex justify-center items-center">
                                 <CheckCircleTwoTone className="text-primary mr-2 inline-block" />
                             </Grid>
                             <Grid item xs={10}>
-                                <Typography variant="body1" className="text-gray-600 dark:text-gray-300">
+                                <Typography variant="body1"
+                                    fontWeight={isHighestPriced() ? "bold" : "normal"}
+                                    className={textFeatureStyle}>
                                     {feature.name}
                                 </Typography>
                             </Grid>
@@ -73,7 +80,9 @@ const PriceCard = ({
             <Box className="p-6 py-6">
                 {product.prices && product.prices.length > 0 && (
                     <Box className="my-6 text-center">
-                        <Typography variant="h4" component="span" className="text-4xl font-bold text-gray-900 dark:text-white">
+                        <Typography variant="h4" component="span"
+                            fontWeight={isHighestPriced() ? "bold" : "normal"}
+                            className="text-4xl font-bold text-gray-900 dark:text-white">
                             ${product.prices[0].unit_amount / 100}
                         </Typography>
                         <Typography variant="h6" component="span" className="text-xl font-medium text-gray-600 dark:text-gray-300">

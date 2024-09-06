@@ -21,19 +21,20 @@ const TechnologiesBanner = () => {
     ];
 
     return (
-        <section className="w-full text-white py-8 flex flex-col justify-center items-center">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-16">
+        <section className="w-full text-white py-8 flex flex-col justify-center items-center" aria-labelledby="technologies-title">
+            <h2 id="technologies-title" className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-16">
                 Powered by Leading Technologies
             </h2>
             <div className="container mx-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-16 sm:gap-8">
                 {techItems.map((tech, index) => (
                     <motion.div
-                        key={index}
+                        key={tech.name}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: index * 0.2 }}
-                        className="flex items-center justify-center space-x-2 "
+                        className="flex items-center justify-center space-x-2"
                     >
+                        <span className="sr-only">{tech.name}</span>
                         {tech.icon}
                     </motion.div>
                 ))}
