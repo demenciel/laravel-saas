@@ -41,13 +41,20 @@ const PriceCard = ({
         : "text-gray-600 dark:text-gray-300";
 
     const buttonStyle = isHighestPriced()
-        ? "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
+        ? "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 shadow-md"
         : "w-full bg-transparent hover:bg-blue-600 text-blue-600 hover:text-white font-bold py-2 px-4 rounded-lg border border-blue-600 transition duration-300";
 
-    const paperStyle = isHighestPriced() ? "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full border border-primary" : "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full"
+    const paperStyle = isHighestPriced()
+        ? "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full border border-primary drop-shadow-lg"
+        : "p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-md text-left hover:ring-1 hover:ring-primary transition duration-300 flex flex-col h-full"
 
     return (
-        <Paper className={paperStyle}>
+        <Paper
+            elevation={1}
+            sx={{
+                borderRadius: "20px",
+            }}
+            className={paperStyle}>
             <Box className="p-6">
                 <Typography
                     fontWeight={isHighestPriced() ? "bold" : "normal"}

@@ -27,6 +27,21 @@ export default function Cancel({ auth }: PageProps) {
     return (
         <div className="dark bg-gray-50 text-black/50 min-h-screen dark:bg-black/90 dark:text-white/50">
             <section className="pb-16 md:py-16 bg-gray-100 dark:bg-transparent">
+                <Head>
+                    <title>Payment Cancel | TechnoSaas</title>
+                    <meta name="description" content="Your payment was cancelled. Please try again." />
+                    <meta name="keywords" content="SaaS, TechnoSaas, payment cancel, SaaS boilerplate, Laravel, React, Stripe Integration" />
+                    <meta property="og:title" content="Payment Cancel | TechnoSaas" />
+                    <meta property="og:description" content="Your payment was cancelled. Please try again." />
+                    <meta property="og:url" content={`${appUrl}/payment-cancel`} />
+                    <meta property="og:image" content={`${appUrl}/Preview.png`} />
+                    <meta property="og:type" content="website" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content="Payment Cancel | TechnoSaas" />
+                    <meta name="twitter:description" content="Your payment was cancelled. Please try again." />
+                    <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
+                    <link rel="canonical" href={`${appUrl}/payment-cancel`} />
+                </Head>
                 <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="/hero-blur.png" />
                 <Navbar auth={auth} />
                 <div className="relative flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
