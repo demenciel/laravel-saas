@@ -29,8 +29,6 @@ const PriceCard = ({
     products: Product[];
     setData: (data: any) => void;
 }) => {
-    console.log(product);
-
     const isHighestPriced = () => {
         if (!product.prices || product.prices.length === 0) return false;
         const currentPrice = product.prices[0].unit_amount;
