@@ -10,15 +10,15 @@ export default function Dashboard({ auth }: PageProps) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Welcome to Your TechnoSaas Dashboard</h2>}
         >
             <Head>
-                <title>TechnoSaas Dashboard - Manage Your SaaS Business Effectively</title>
+                <title>Dashboard | TechnoSaas</title>
                 <meta name="description" content="Access and manage your SaaS business effectively with the TechnoSaas Dashboard. Get insights, manage users, subscriptions, and more." />
                 <meta name="keywords" content="SaaS Dashboard, TechnoSaas, SaaS management, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
-                <meta property="og:title" content="TechnoSaas Dashboard - Manage Your SaaS Business Effectively" />
+                <meta property="og:title" content="Dashboard | TechnoSaas" />
                 <meta property="og:description" content="Access and manage your SaaS business effectively with the TechnoSaas Dashboard. Get insights, manage users, subscriptions, and more." />
                 <meta property="og:url" content={`${appUrl}/dashboard`} />
                 <meta property="og:image" content={`${appUrl}/Preview.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="TechnoSaas Dashboard - Manage Your SaaS Business Effectively" />
+                <meta name="twitter:title" content="Dashboard | TechnoSaas" />
                 <meta name="twitter:description" content="Access and manage your SaaS business effectively with the TechnoSaas Dashboard. Get insights, manage users, subscriptions, and more." />
                 <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
             </Head>

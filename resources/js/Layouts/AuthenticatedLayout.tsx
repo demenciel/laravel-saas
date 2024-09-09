@@ -5,16 +5,17 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import { User } from '@/types';
+import ThemeToggle from '@/Components/ThemeToggle';
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen shadow-md overflow-hidden bg-gray-50 text-black/50 dark:bg-black/90 dark:text-white/50">
-            <nav className="border-b border-gray-100">
+        <div className="min-h-screen shadow-md overflow-hidden text-black/50 dark:bg-black/90 dark:text-white/50">
+            <nav className="border-b border-gray-800 dark:border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        <div className="flex ">
+                        <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <ApplicationLogo width={84} height={84} />
@@ -28,11 +29,14 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 <NavLink className='text-black/50 dark:text-white/50' href={route('users.index')} active={route().current('users.index')}>
                                     Users
                                 </NavLink>
+                                <NavLink className='text-black/50 dark:text-white/50' href={route('blog.index')} active={route().current('blog.index')}>
+                                    Blogs
+                                </NavLink>
                             </div>
                         </div>
-
                         <div className="hidden sm:flex sm:items-center sm:ms-6 ">
-                            <div className="ms-3 relative ">
+                            <div className="ms-3 relative flex flex-row gap-2">
+                                <ThemeToggle />
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex overflow-hidden rounded-lg bg-whiteshadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
@@ -101,6 +105,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('users.index')} active={route().current('users.index')}>
                             Users
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('blog.index')} active={route().current('blog.index')}>
+                            Blogs
                         </ResponsiveNavLink>
                     </div>
 

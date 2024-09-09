@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('download_links', function (Blueprint $table) {
             $table->string('product')->nullable();
+            $table->boolean('is_paid')->default(false);
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('download_links', function (Blueprint $table) {
             $table->dropColumn('product');
+            $table->dropColumn('is_paid');
         });
     }
 };

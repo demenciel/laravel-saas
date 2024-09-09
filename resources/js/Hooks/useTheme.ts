@@ -23,15 +23,28 @@ const getMuiTheme = (mode: 'light' | 'dark') => createTheme({
         mode,
         primary: {
             main: tailwindColors[mode].primary,
+            light: `hsl(from ${tailwindColors[mode].primary} h s calc(l + 10%))`,
         },
         secondary: {
             main: tailwindColors[mode].secondary,
+            light: `hsl(from ${tailwindColors[mode].secondary} h s calc(l + 10%))`,
         },
         background: {
             default: tailwindColors[mode].background,
         },
         text: {
             primary: tailwindColors[mode].text,
+        },
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        backgroundColor: `color-mix(in srgb, ${tailwindColors[mode].primary} 90%, ${mode === 'light' ? 'white' : 'black'})`,
+                    },
+                },
+            },
         },
     },
 });

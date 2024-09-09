@@ -60,6 +60,9 @@ class PaymentsController extends Controller
         try {
             $session_id = $request->input('session_id');
             $session = $this->paymentsService->getSession($session_id);
+            if (auth()->check()) {
+                auth()->user()->update(['stripe_id' => $session->customer]);
+            }
             $downloadLink = DownloadLink::where('session_id', $session_id)->first();
             if ($session->payment_status == 'paid' && !$downloadLink) {
                 $this->paymentsService->createDownloadLink($session, $session_id);

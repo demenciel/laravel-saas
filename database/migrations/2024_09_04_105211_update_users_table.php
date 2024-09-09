@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->string('path');
+            $table->integer('user_id')->nullable()->after('id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
-
         Schema::table('users', function (Blueprint $table) {
-            // update with common columns
-            $table->string('status')->default('active');
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
             $table->foreignId('profile_photo_id')->nullable()->constrained('photos');
         });
     }
@@ -35,9 +32,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['profile_photo_id']);
             $table->dropColumn('profile_photo_id');
-            $table->dropColumn('status');
-            $table->dropColumn('phone');
-            $table->dropColumn('address');
         });
     }
 };

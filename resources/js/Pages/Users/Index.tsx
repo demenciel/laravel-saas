@@ -15,19 +15,25 @@ import {
     Box,
     IconButton,
     Avatar,
+    Popover,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    ListItemButton,
 } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useTheme } from "@/Hooks/useTheme";
 import UserModal from "./Partials/UserModal";
 import DeleteUserModal from "./Partials/DeleteUserModal";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { ArrowDropDownCircleTwoTone } from "@mui/icons-material";
 
 /* import UserModal from './Partials/UserModal';
 import DeleteUserModal from './Partials/DeleteUserModal'; */
-
 type SortField = "name" | "email" | "phone" | "role";
 type SortOrder = "asc" | "desc";
 
@@ -44,9 +50,11 @@ export default function UsersIndex({
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isShowModalOpen, setIsShowModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const appUrl = usePage().props.appUrl || null;
 
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const [sortedUsers, setSortedUsers] = useState<User[]>(users);
     const [sortField, setSortField] = useState<SortField>("name");
@@ -97,7 +105,7 @@ export default function UsersIndex({
             }
         >
             <Head>
-                <title>TechnoSaas - Manage Users</title>
+                <title>Manage Users | TechnoSaas</title>
                 <meta
                     name="description"
                     content="Manage users of your SaaS application with TechnoSaas. Add, edit, or remove users easily."
@@ -106,7 +114,7 @@ export default function UsersIndex({
                     name="keywords"
                     content="User Management, TechnoSaas, SaaS Users, Laravel, React, TypeScript, Tailwind CSS"
                 />
-                <meta property="og:title" content="TechnoSaas - Manage Users" />
+                <meta property="og:title" content="Manage Users | TechnoSaas" />
                 <meta
                     property="og:description"
                     content="Manage users of your SaaS application with TechnoSaas. Add, edit, or remove users easily."
@@ -116,7 +124,7 @@ export default function UsersIndex({
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta
                     name="twitter:title"
-                    content="TechnoSaas - Manage Users"
+                    content="Manage Users | TechnoSaas"
                 />
                 <meta
                     name="twitter:description"
@@ -208,25 +216,51 @@ export default function UsersIndex({
                                         </TableCell>
                                         <TableCell align="center">
                                             <IconButton
-                                                color="primary"
-                                                onClick={() => {
+                                                onClick={(event) => {
                                                     setSelectedUser(user);
-                                                    setIsEditModalOpen(true);
+                                                    setAnchorEl(event.currentTarget);
                                                 }}
                                                 size="small"
                                             >
-                                                <EditIcon />
+                                                <ArrowDropDownCircleTwoTone />
                                             </IconButton>
-                                            <IconButton
-                                                color="error"
-                                                onClick={() => {
-                                                    setSelectedUser(user);
-                                                    setIsDeleteModalOpen(true);
+                                            <Popover
+                                                open={Boolean(anchorEl)}
+                                                anchorEl={anchorEl}
+                                                onClose={() => setAnchorEl(null)}
+                                                anchorOrigin={{
+                                                    vertical: 'bottom',
+                                                    horizontal: 'center',
                                                 }}
-                                                size="small"
+                                                transformOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'center',
+                                                }}
                                             >
-                                                <DeleteIcon />
-                                            </IconButton>
+                                                <List>
+                                                    <ListItemButton onClick={() => {
+                                                        setIsShowModalOpen(true);
+                                                        setAnchorEl(null);
+                                                    }}>
+                                                        <ListItemIcon><VisibilityIcon /></ListItemIcon>
+                                                        <ListItemText primary="Show" />
+                                                    </ListItemButton>
+                                                    <ListItemButton onClick={() => {
+                                                        setIsEditModalOpen(true);
+                                                        setAnchorEl(null);
+                                                    }}>
+                                                        <ListItemIcon><EditIcon /></ListItemIcon>
+                                                        <ListItemText primary="Edit" />
+                                                    </ListItemButton>
+                                                    <ListItemButton onClick={() => {
+                                                        setIsDeleteModalOpen(true);
+                                                        setAnchorEl(null);
+                                                    }}>
+                                                        <ListItemIcon><DeleteIcon /></ListItemIcon>
+                                                        <ListItemText primary="Delete" />
+                                                    </ListItemButton>
+                                                </List>
+                                            </Popover>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -244,6 +278,7 @@ export default function UsersIndex({
             )}
             {isCreateModalOpen && (
                 <UserModal
+                    isEdit={false}
                     isOpen={isCreateModalOpen}
                     onClose={() => setIsCreateModalOpen(false)}
                     user={null}
@@ -252,8 +287,19 @@ export default function UsersIndex({
             )}
             {isEditModalOpen && (
                 <UserModal
+                    isEdit={true}
                     isOpen={isEditModalOpen}
                     onClose={() => setIsEditModalOpen(false)}
+                    user={selectedUser}
+                    roles={roles}
+                    currentUser={auth.user}
+                />
+            )}
+            {isShowModalOpen && (
+                <UserModal
+                    isEdit={false}
+                    isOpen={isShowModalOpen}
+                    onClose={() => setIsShowModalOpen(false)}
                     user={selectedUser}
                     roles={roles}
                     currentUser={auth.user}

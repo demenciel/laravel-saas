@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function hasRole(string $role): bool
+    {
+        return $this->role->name === $role;
+    }
+
     // Photo model has user_id field
     public function photo()
     {

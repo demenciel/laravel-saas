@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with(['photo', 'role'])->where('role_id', 4)->get();
+        $users = User::with(['photo', 'role'])->where('role_id', 3)->get();
         $roles = Role::all();
         return Inertia::render('Users/Index', ['users' => $users, 'roles' => $roles]);
     }

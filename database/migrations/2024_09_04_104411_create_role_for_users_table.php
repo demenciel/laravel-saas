@@ -17,24 +17,14 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
-
-        // create default roles
-        DB::table('roles')->insert([
-            ['name' => 'admin'],
-            ['name' => 'user'],
-        ]);
-
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('cascade');
         });
-
-        // Update existing users with default role_id
-        DB::table('users')->update(['role_id' => 2]);
-
-        // Now make the column NOT NULL
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->nullable(false)->change();
-        });
+        DB::table('roles')->insert([
+            ['name' => 'admin'],
+            ['name' => 'user'],
+            ['name' => 'seeder'],
+        ]);
     }
 
     /**
@@ -43,12 +33,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('roles');
-
         Schema::table('users', function (Blueprint $table) {
-            // drop foreign key
             $table->dropForeign(['role_id']);
-            // drop column
             $table->dropColumn('role_id');
         });
+        DB::table('roles')->truncate();
     }
 };

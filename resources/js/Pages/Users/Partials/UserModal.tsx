@@ -11,6 +11,7 @@ interface UserModalProps {
     user: User | null;
     roles?: Role[];
     currentUser?: User;
+    isEdit?: boolean;
 }
 
 interface Role {
@@ -18,7 +19,7 @@ interface Role {
     name?: string;
 }
 
-export default function UserModal({ isOpen, onClose, user, roles, currentUser }: UserModalProps) {
+export default function UserModal({ isOpen, onClose, user, roles, currentUser, isEdit }: UserModalProps) {
     const [avatar, setAvatar] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const { showSnackbar } = useSnackbar();
@@ -65,9 +66,6 @@ export default function UserModal({ isOpen, onClose, user, roles, currentUser }:
                 formData.append(key, data[key as keyof typeof data] as string);
             }
         });
-
-        // Only append photo if there's a file
-        console.log(avatar);
         if (avatar instanceof File) {
             formData.append('photo', avatar);
         }
@@ -98,6 +96,9 @@ export default function UserModal({ isOpen, onClose, user, roles, currentUser }:
     };
 
     const canEdit = () => {
+        if (!isEdit) {
+            return true;
+        }
         if (user && user.id === currentUser?.id) {
             return true;
         }
@@ -109,6 +110,7 @@ export default function UserModal({ isOpen, onClose, user, roles, currentUser }:
             sx={{
                 '& .MuiDialog-paper': {
                     padding: '32px',
+                    backgroundColor: 'primary.background',
                 },
             }}
         >
@@ -133,6 +135,7 @@ export default function UserModal({ isOpen, onClose, user, roles, currentUser }:
                         </Box>
                         <TextField
                             label="Name"
+                            disabled={canEdit()}
                             value={data.name}
                             onChange={e => setData('name', e.target.value)}
                             error={!!errors.name}

@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         $faker = Faker::create();
         $adminRoleId = Role::where('name', 'admin')->first()->id;
-        $userRoleId = Role::where('name', 'user')->first()->id;
+        $userRoleId = Role::where('name', 'seeder')->first()->id;
 
         // Create an admin user
         User::updateOrCreate(
