@@ -26,10 +26,12 @@ export default function Index({ auth }: PageProps) {
                 <meta property="og:url" content={`${appUrl}/`} />
                 <meta property="og:image" content={`${appUrl}/Preview.png`} />
                 <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@technoSaas" />
+                <meta content='@technoSaas' name='twitter:creator'/>
                 <meta name="twitter:title" content="TechnoSaas - Rapid SaaS Development Boilerplate" />
                 <meta name="twitter:description" content="Launch your SaaS faster with TechnoSaas. Seamless Laravel and React integration, Stripe, TypeScript, and more." />
                 <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
-                <meta name="twitter:card" content="summary_large_image" />
                 <link rel="canonical" href={`${appUrl}/`} />
             </Head>
             <div className="text-gray-800 relative dark:bg-black/90 dark:text-white/50 overflow-hidden">
