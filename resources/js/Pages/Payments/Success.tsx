@@ -39,6 +39,21 @@ export default function Success({ auth }: PageProps) {
         <div className="bg-gray-50 text-black/50 min-h-screen dark:bg-black/90 dark:text-white/50">
             <section className="pb-16 md:py-16 ">
                 <img id="background" className="absolute -left-20 top-0 max-w-[877px]" src="/hero-blur.png" />
+                <Head>
+                    <title>Payment Success | TechnoSaas</title>
+                    <meta name="description" content="Thank you for your purchase! Your payment was successful. You'll receive an email with further details." />
+                    <meta name="keywords" content="SaaS, TechnoSaas, payment success, SaaS boilerplate, Laravel, React, Stripe Integration" />
+                    <meta property="og:title" content="Payment Success | TechnoSaas" />
+                    <meta property="og:description" content="Your payment was successfully processed. Get ready to take your SaaS to the next level with TechnoSaas." />
+                    <meta property="og:url" content={`${appUrl}/payment-success`} />
+                    <meta property="og:image" content={`${appUrl}/Preview.png`} />
+                    <meta property="og:type" content="website" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content="Payment Success | TechnoSaas" />
+                    <meta name="twitter:description" content="Thank you for your purchase! Your payment was successful. You'll receive an email with further details." />
+                    <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
+                    <link rel="canonical" href={`${appUrl}/payment-success`} />
+                </Head>
                 <Navbar auth={auth} />
                 <div className="relative flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <Head>

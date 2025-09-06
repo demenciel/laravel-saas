@@ -13,16 +13,17 @@ export default function Edit({ auth, mustVerifyEmail, status }: PageProps<{ must
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}
         >
             <Head>
-                <title>Profile</title>
-                <meta name="description" content="The Profile page for your Saas business built using TechnoSaas Boilerplate" />
+                <title>Profile | Manage Your SaaS Business with TechnoSaas Boilerplate</title>
+                <meta name="description" content="Manage your SaaS business profile built with TechnoSaas. Efficient and optimized SaaS development using Laravel and React." />
+
                 <meta name="keywords" content="SaaS, TechnoSaas, boilerplate, Laravel, React, TypeScript, Tailwind CSS, Stripe Integration, SEO Optimized" />
-                <meta property="og:title" content="Profile" />
+                <meta property="og:title" content="Profile | Manage Your SaaS Business with TechnoSaas Boilerplate" />
                 <meta property="og:description" content="The Profile page for your Saas business built using TechnoSaas Boilerplate" />
                 <meta property="og:url" content={`${appUrl}/`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Profile" />
-                <meta name="twitter:description" content="Discover TechnoSaas, the ultimate SaaS boilerplate to streamline your operations. Build your next project faster with pre-configured integrations and tools." />
-                <meta name="twitter:image" content={`${appUrl}/path_to_image.png`} />
+                <meta name="twitter:title" content="Profile | Manage Your SaaS Business with TechnoSaas Boilerplate" />
+                <meta name="twitter:description" content="Manage your SaaS business profile built with TechnoSaas. Efficient and optimized SaaS development using Laravel and React." />
+                <meta name="twitter:image" content={`${appUrl}/Preview.png`} />
             </Head>
 
             <div className="py-12 ">

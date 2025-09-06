@@ -18,8 +18,8 @@ export default function Index({ auth }: PageProps) {
     return (
         <>
             <Head>
-                <title>TechnoSaas - Ultimate Laravel and React SaaS Boilerplate</title>
-                <meta name="description" content="Accelerate your SaaS development with TechnoSaas, a powerful Laravel and React boilerplate. Features Stripe integration, TypeScript, and more for efficient SaaS creation." />
+                <title>TechnoSaas | Laravel & React SaaS Boilerplate with Stripe Integration</title>
+                <meta name="description" content="TechnoSaas is a powerful Laravel & React boilerplate. Launch your SaaS fast with Stripe, TypeScript, and more." />
                 <meta name="keywords" content="SaaS boilerplate, TechnoSaas, Laravel React, Stripe integration, TypeScript, Tailwind CSS, SaaS development" />
                 <meta property="og:title" content="TechnoSaas - Rapid SaaS Development Boilerplate" />
                 <meta property="og:description" content="Launch your SaaS faster with TechnoSaas. Seamless Laravel and React integration, Stripe, TypeScript, and more." />
